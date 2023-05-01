@@ -1,0 +1,292 @@
+header{
+    background: #1d2c35;
+    /*
+    top: 0;
+    position: fixed;
+    width: 100%;
+    */
+}
+
+.navLink{
+    color: #c3c4c7;
+}
+
+.main{
+    display: flex;
+     
+}
+
+.sidebar{
+    width: 70px;
+    background-color: #1d2327;
+    min-height: 100vh;
+    font-family: sans-serif;
+    left: 0;
+    overflow-x: hidden;
+    
+
+    /*position: fixed;*/
+}
+
+.sidebar.active{
+    width: 280px;
+}
+
+
+.sidebar ul li{
+    position: relative;
+    list-style: none;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+.sidebar ul li a{
+    position: relative;
+    display: flex;
+    text-decoration: none;
+    color: #c3c4c7;
+    font-size: 15px;
+}
+
+.sidebar ul li:hover{
+    background: black;
+}
+
+.sidebar ul li.active{
+    background-color: green;
+}
+
+.sidebar ul li.active a{
+    color: white;
+}
+.sidebar ul li a .icon{
+    position: relative;
+    min-width: 30px;
+    height: 50px;
+    line-height: 62px;
+    text-align: center;
+}
+
+.sidebar ul li a .icon ion-icon{
+    font-size: 1.5em;
+}
+
+.sidebar ul li a .title{
+    position: relative;
+    padding-left: 10px;
+    height: 50px;
+    line-height: 50px;
+}
+
+ .sidebar ul .subSettings a{
+    padding-left: 20px;
+}
+
+.sidebar ul .subSettings a .icon{
+    position: relative;
+    min-width: 20px;
+    height: 30px;
+    line-height: 47px;
+    text-align: center;
+}
+
+.sidebar ul .subSettings a .icon ion-icon{
+    font-size: 1.2em;
+}
+
+.sidebar ul .subSettings a .title{
+    position: relative;
+    padding-left: 10px;
+    height: 30px;
+    line-height: 40px;
+    text-align: center;
+}
+
+.subSettings{
+    display: none;
+}
+
+.subSettings.show{
+    display: block;
+}
+
+.subSettings.show.active{
+    background-color: green;
+}
+
+.subSettings.show.active a{
+    color: white;
+}
+
+
+
+
+.sidebar ul .subOrders a{
+    padding-left: 20px;
+}
+
+.sidebar ul .subOrders a .icon{
+    position: relative;
+    min-width: 20px;
+    height: 30px;
+    line-height: 47px;
+    text-align: center;
+}
+
+.sidebar ul .subOrders a .icon ion-icon{
+    font-size: 1.2em;
+}
+
+.sidebar ul .subOrders a .title{
+    position: relative;
+    padding-left: 10px;
+    height: 30px;
+    line-height: 40px;
+    text-align: center;
+}
+
+.subOrders{
+    display: none;
+}
+
+.subOrders.show{
+    display: block;
+}
+
+.subOrders.show.active{
+    background-color: green;
+}
+
+.subOrders.show.active a{
+    color: white;
+}
+
+
+
+
+.sidebar ul .subSuppliers a{
+    padding-left: 20px;
+}
+
+.sidebar ul .subSuppliers a .icon{
+    position: relative;
+    min-width: 20px;
+    height: 30px;
+    line-height: 47px;
+    text-align: center;
+}
+
+.sidebar ul .subSuppliers a .icon ion-icon{
+    font-size: 1.2em;
+}
+
+.sidebar ul .subSuppliers a .title{
+    position: relative;
+    padding-left: 10px;
+    height: 30px;
+    line-height: 40px;
+    text-align: center;
+}
+
+.subSuppliers{
+    display: none;
+}
+
+.subSuppliers.show{
+    display: block;
+}
+
+.subSuppliers.show.active{
+    background-color: green;
+}
+
+.subSuppliers.show.active a{
+    color: white;
+}
+
+
+
+
+
+.sidebar ul .subCouriers a{
+    padding-left: 20px;
+}
+
+.sidebar ul .subCouriers a .icon{
+    position: relative;
+    min-width: 20px;
+    height: 30px;
+    line-height: 47px;
+    text-align: center;
+}
+
+.sidebar ul .subCouriers a .icon ion-icon{
+    font-size: 1.2em;
+}
+
+.sidebar ul .subCouriers a .title{
+    position: relative;
+    padding-left: 10px;
+    height: 30px;
+    line-height: 40px;
+    text-align: center;
+}
+
+.subCouriers{
+    display: none;
+}
+
+.subCouriers.show{
+    display: block;
+}
+
+.subCouriers.show.active{
+    background-color: green;
+}
+
+.subCouriers.show.active a{
+    color: white;
+}
+
+
+.toggle{
+    position: relative;
+    width: 35px;
+    height: 35px;
+    background: rgb(45, 45, 186);
+    border-radius: 10px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 30px;
+}
+
+.toggle.active{
+    background: rgb(233, 82, 82);
+}
+
+.toggle ion-icon{
+    position: absolute;
+    color: white;
+    font-size: 30px; 
+    display: none;
+}
+
+.toggle ion-icon.open,
+.toggle.active ion-icon.close{
+    display: block;
+}
+
+.toggle ion-icon.close,
+.toggle.active ion-icon.open{
+    display: none;
+}
+
+
+
+
+.content{
+    width: 100%;
+    background: yellow;
+}

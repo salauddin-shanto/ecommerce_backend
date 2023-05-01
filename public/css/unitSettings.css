@@ -1,0 +1,35 @@
+.content-margin{
+    margin: 25px;
+}
+.create-unit{ 
+    margin-top: -10px;
+}  
+.submit-btn{
+    margin-top: 30px; 
+    width: 100%;
+}
+ 
+.show-units{
+    margin-top: 30px;
+}
+
+.divider-line{
+    margin-top: 30px;
+    height: 20px;
+    background: grey;
+}
+
+.form-upper-row{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.search-btn{
+    width: 150px;
+}
+
+.default-btn{
+    width: 185px;
+}
+
