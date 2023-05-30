@@ -1,0 +1,23 @@
+.content-margin{
+    margin: 20px;
+    margin-top: 70px;
+}
+
+h4{
+    color: black;
+}
+
+.form-upper-row{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.search-btn{
+    width: 150px;
+}
+
+.default-btn{
+    width: 185px;
+}
+

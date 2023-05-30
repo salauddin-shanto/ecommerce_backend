@@ -13,14 +13,14 @@ use function PHPUnit\Framework\isNull;
 class UnitController extends Controller
 {
     public function show(){
-        $units=DB::table('units')->get();       
+        $units=DB::table('units')->simplePaginate(15);        
         return view('admin/settings/unitSettings',['units'=>$units]);
     } 
 
     public function store(Request $request){
         $request->validate([
             'unit_name' => 'required|unique:units'
-        ]);
+        ]); 
 
 
         $unit=DB::table('units')

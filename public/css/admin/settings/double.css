@@ -1,0 +1,110 @@
+.sidebar {
+  width: 250px;
+  height: 100%;
+  background-color: #f1f1f1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow-x: hidden;
+  padding-top: 20px;
+  transition: all 0.5s ease;
+}
+
+.collapsible {
+  background-color: #ffffff;
+  color: #000000;
+  cursor: pointer;
+  padding: 10px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.collapsible:hover {
+  background-color: #e2e2e2;
+}
+
+.content {
+  padding: 0 10px;
+  display: none;
+  overflow: hidden;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  margin: 10px 0;
+  cursor: pointer;
+}
+
+li:hover {
+  background-color: #e2e2e2;
+}
+
+.nested {
+  display: none;
+  padding-left: 20px;
+}
+
+.active {
+  background-color: #e2e2e2;
+}
+
+.active-link {
+  background-color: green;
+}
+
+
+
+
+
+
+
+
+
+
+.toggle{
+margin-bottom: 15px;
+position: relative;
+width: 35px;
+height: 35px;
+background: rgb(45, 45, 186);
+border-radius: 20px;
+cursor: pointer;
+display: flex;
+justify-content: left;
+padding-left: 3px;
+align-items: center;
+
+}
+
+.toggle.active{
+background: rgb(233, 82, 82);
+}
+
+.toggle ion-icon{
+position: absolute;
+color: white;
+font-size: 30px; 
+display: none;
+}
+
+.toggle ion-icon.open,
+.toggle.active ion-icon.close{ 
+display: block;
+} 
+
+.toggle ion-icon.close,
+.toggle.active ion-icon.open{
+display: none;
+}
+
+.sidebar.active{
+width: 70px;
+}

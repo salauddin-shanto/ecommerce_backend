@@ -1,0 +1,40 @@
+.content-margin{
+    margin-left: -50px;
+    margin-top: 20px;
+}
+.create-unit{ 
+    margin-top: -10px;
+}  
+
+.table-title{
+    margin-left: -3px;
+}
+.submit-btn{
+    margin-top: 30px; 
+    width: 100%;
+}
+ 
+.show-units{
+    margin-top: 30px;
+}
+
+.divider-line{
+    margin-top: 30px;
+    height: 20px;
+    background: grey;
+    margin-left: 60px;
+}
+
+.form-upper-row{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.search-btn{
+    width: 150px;
+}
+
+.default-btn{
+    width: 185px;
+}

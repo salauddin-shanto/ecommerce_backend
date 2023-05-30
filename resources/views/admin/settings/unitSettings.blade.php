@@ -1,8 +1,8 @@
-@extends('admin/master')
-     
+@extends('admin/layout/layout') 
+        
 @section('content')
-    <link rel="stylesheet" href="{{asset('css/unitSettings.css')}}">
-    <div class="content-margin">
+    <link rel="stylesheet" href="{{asset('css/admin/settings/unitSettings0.css')}}">
+    <div class="content-margin"> 
         <div class="create-unit">
             <div class="form-title">
                 <h4>Create Unit</h4>
@@ -22,12 +22,13 @@
                     </div>
                     <div class="col-md">
                         <label for="" class="form-label">Parent Unit</label>
-                        <input type="text" class="form-control" name="parent_unit" id="parent_unit" value="{{old('parent_unit')}}" aria-describedby="textHelpId" placeholder="kg">
-                        <span class="text-danger">
-                            @error('parent_unit')
-                                {{$message}}
-                            @enderror
-                        </span>
+                        <select class="form-select form-select-md" name="parent_unit" id="parent_unit">
+                            <option value="{{old('parent_unit')}}">{{old('parent_unit') ? old("parent_unit"):'Select One'}}</option>
+                            @foreach ($units as $unit)
+                                <option value="{{$unit->unit_name}}">{{$unit->unit_name}}</option>
+                            @endforeach
+                        </select> 
+
                     </div>
                     <div class="col-md">
                         <label for="" class="form-label">Description</label>
@@ -101,7 +102,12 @@
                         
                     </tbody>
                 </table>
+                <div class="row">
+                    {{$units->links()}}
+                </div>
+                
             </div>
+
             
         </div>
         

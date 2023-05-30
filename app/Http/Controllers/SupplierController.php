@@ -8,13 +8,13 @@ use Illuminate\Support\Facades\DB;
 class SupplierController extends Controller 
 {
     public function show(){
-        $suppliers=DB::table('suppliers')
-                    ->get();
-        return view('admin/settings/supplierSettings',['suppliers'=>$suppliers]);
+        $suppliers=DB::table('suppliers')->simplePaginate(15);
+        return view('admin/settings/showSuppliers',['suppliers'=>$suppliers]);
     }
-
+ 
     public function create(){
-        return view('admin/settings/addSupplier');
+        $arias=DB::table('arias')->get();
+        return view('admin/settings/addSupplier',['arias'=>$arias]);
     }
 
     public function store(Request $request){
@@ -62,8 +62,8 @@ class SupplierController extends Controller
 
             ]);
         }
-        return redirect('/supplier-settings'); 
-    }
+        return redirect('/show-suppliers'); 
+    } 
  
     public function details($id){
         $supplier=DB::table('suppliers')

@@ -1,23 +1,23 @@
 @extends('admin/layout/layout')
 
 @section('content')
-    <link rel="stylesheet" href="{{asset('css/admin/settings/addSupplier.css')}}">
+    <link rel="stylesheet" href="{{asset('css/admin/settings/addOperator.css')}}">
     <div class="content-margin card shadow-lg mb-5 bg-white rounded">
         <div class="card-header bg-dark">
             <div class="table-title"> 
-                <h4>Add Supplier</h4> 
+                <h4>Add Operator</h4> 
             </div> 
-              
+               
         </div>  
 
         <div class="add-supplier card-body">
            
 
-            <form action="{{route('add-supplier')}}" method="POST" class="add-supplier-form" enctype="multipart/form-data">
+            <form action="{{route('add-operator')}}" method="POST" class="add-supplier-form" enctype="multipart/form-data">
                 @csrf
                 <div class="row">
                     <div class="col-md ">
-                      <label for="" class="form-label">Supplier Name</label>
+                      <label for="" class="form-label">Operator Name</label>
                       <input type="text" class="form-control" name="name" value="{{old('name')}}" id="name">
                       <span class="text-danger">
                          @error('name')
@@ -57,14 +57,16 @@
                       </div>
 
                       <div class="col-md ">
-                        <label for="" class="form-label">Shop location</label>
-                        <input type="text" class="form-control" name="shop_location" value="{{old('shop_location')}}" id="shop_location">
+                        <label for="" class="form-label">NID</label>
+                        <input type="text" class="form-control" name="nid" value="{{old('nid')}}" id="nid">
                         <span class="text-danger">
-                           @error('shop_location')
+                           @error('nid')
                                {{$message}}
                            @enderror
                         </span>     
-                      </div>
+                    </div>
+
+
                 </div>
 
                 <div class="row">
@@ -95,20 +97,8 @@
                                {{$message}}
                            @enderror
                         </span>     
-                      </div>
-
-                    <div class="col-md ">
-                        <label for="" class="form-label">NID</label>
-                        <input type="text" class="form-control" name="nid" value="{{old('nid')}}" id="nid">
-                        <span class="text-danger">
-                           @error('nid')
-                               {{$message}}
-                           @enderror
-                        </span>     
                     </div>
-                </div>
 
-                <div class="row">
                     <div class="col-md ">
                         <label for="" class="form-label">Upload Image</label>
                         <input type="file" class="form-control" name="image" value="{{old('image')}}" id="image">
@@ -117,9 +107,11 @@
                                {{$message}}
                            @enderror 
                         </span>     
-                      </div>
+                    </div>
+
                 </div>
-  
+
+
                     <div>
                          <button type="submit" class="btn btn-primary submit-btn">Submit</button>
                     </div>

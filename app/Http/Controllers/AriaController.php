@@ -3,34 +3,41 @@
 namespace App\Http\Controllers;
 
 use App\Models\Arias;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class AriaController extends Controller
 {
-    public function show(){
-        $aria=DB::table('arias')
-                ->where('aria_id','')
-                ->first();
-
-        $arias=DB::table('arias')->get();
-
-        return view('admin/settings/ariaSettings',['aria'=>$aria,'arias'=>$arias]);
+    public function addArea(){
+        $arias=DB::table('arias')
+                ->select('aria_name')
+                ->get();
+        return view('admin/settings/addArea',['arias'=>$arias]);
     }
 
-    public function store(Request $request){
+    public function storeArea(Request $request){
         $request->validate([
             'aria_name' => 'required|unique:arias'
         ]);
+        $now=Carbon::now();
 
         $aria=DB::table('arias')
                 ->insert([
                     'aria_name' => $request['aria_name'],
-                    'parent_aria' => $request['parent_aria']
+                    'parent_aria' => $request['parent_aria'],
+                    'created_at' =>$now,
+                    'updated_at' =>$now
                 ]);
 
-        return redirect('aria-settings');
+        return redirect('show-areas');
+    }
 
+    public function showAreas(){
+        $arias=DB::table('arias')
+        ->orderBy('created_at','desc')
+        ->get();
+        return view('admin/settings/showAreas',['arias'=>$arias]);
     }
 
     public function delete($aria_id){
@@ -38,18 +45,15 @@ class AriaController extends Controller
                 ->where('aria_id',$aria_id)
                 ->delete();
 
-        return redirect('aria-settings');
-    }
+        return redirect('show-areas');
+    } 
 
     public function edit($aria_id){
         $aria=DB::table('arias')
                 ->where('aria_id',$aria_id)
                 ->first();
 
-        $arias=DB::table('arias')
-                ->get();
-
-        return view('admin/settings/ariaUpdate',['aria'=>$aria,'arias'=>$arias]);
+        return view('admin/settings/areaUpdate',['aria'=>$aria]);
     }
 
     public function update($aria_id, Request $request){
@@ -59,7 +63,7 @@ class AriaController extends Controller
                     'aria_name'=> $request['aria_name'],
                     'parent_aria' =>$request['parent_aria']
                 ]);
-        return redirect('aria-settings');
+        return redirect('show-areas');
 
     }
 
@@ -70,7 +74,7 @@ class AriaController extends Controller
                     ->orWhere('parent_aria','like','%'.$request['search_field'].'%')
                     ->get();
         
-        return view('admin/settings/ariaSettings',['arias'=>$arias]);
+        return view('admin/settings/showAreas',['arias'=>$arias]);
         
     }
 

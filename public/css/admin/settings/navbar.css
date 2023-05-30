@@ -1,0 +1,20 @@
+header{
+    background: #1d2c35;
+    top: 0;
+    /* position: fixed; */
+    
+    height: 55px;
+
+    transition: all 0.5s ease;
+}
+
+
+header.active{
+    background: #1d2c35;
+    top: 0;
+    /* position: fixed; */
+    
+    height: 55px;
+    margin-left: -30px;
+    
+}
