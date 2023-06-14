@@ -12,7 +12,7 @@
                 <div class="profile">
                     <div>
                         @if ($supplier->image)
-                            <img src="{{asset('storage/images/'.$supplier->image)}}" class="photo">
+                            <img src="{{asset('storage/images/supplier/'.$supplier->image)}}" class="photo">
                         @else
                             <span>No image found!</span>
                         @endif

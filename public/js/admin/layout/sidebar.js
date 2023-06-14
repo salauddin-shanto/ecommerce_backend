@@ -63,3 +63,13 @@ document.addEventListener("DOMContentLoaded", function() {
   
   });
   
+  document.addEventListener('DOMContentLoaded', function() {
+    var linkItems = document.querySelectorAll('.sidebar-link');
+
+    linkItems.forEach(function(item) {
+        item.addEventListener('click', function() {
+            var link = this.querySelector('a');
+            window.location.href = link.href;
+        });
+    });
+});

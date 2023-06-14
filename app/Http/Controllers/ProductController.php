@@ -52,7 +52,7 @@ class ProductController extends Controller
         /* for gallery image */
         if($request->file('gallery_image')){
             $gallery_image_name=time().'gallery_image.'.$request->file('gallery_image')->getClientOriginalExtension();
-            $request->file('gallery_image')->storeAs('public/images/product',$gallery_image_name);
+            $request->file('gallery_image')->storeAs('/images/product',$gallery_image_name);
         }
 
         else{
@@ -148,7 +148,7 @@ class ProductController extends Controller
             $photosArray = [];
             foreach($request->file('photos') as $photo){
                 $photo_name=time().'product_photo.'.$photo->getClientOriginalExtension();
-                $photo->storeAs('public/images/product',$photo_name);
+                $photo->storeAs('/images/product',$photo_name);
                 $photosArray[]=$photo_name;
             }
             $photos_string=implode(',',$photosArray); 

@@ -50,7 +50,7 @@
                             <tr class="">
                                 <td> 
                                     @if ($supplier->image)
-                                        <img src="{{asset('storage/images/'.$supplier->image)}}" class="inner-photo">
+                                        <img src="{{asset('storage/images/supplier/'.$supplier->image)}}" class="inner-photo">
                                     @else
                                         <span>No image found!</span>
                                     @endif

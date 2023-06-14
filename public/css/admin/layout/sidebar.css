@@ -70,7 +70,7 @@ a:hover{
 
 }
 li:hover {
-  background-color: #7d7777;
+  background-color: #0d0d0d;
 }
 
 .nested {
@@ -83,7 +83,7 @@ li:hover {
 }
  */
 .active-link {
-  background-color: white;
+  background-color: grey;
 }
 
 .sidebar button div {
@@ -179,3 +179,11 @@ div div ul li a{
     display: none;
 }
 
+a{
+  color: white;
+  align-items: right;
+}
+
+a:hover{
+  color: white;
+}

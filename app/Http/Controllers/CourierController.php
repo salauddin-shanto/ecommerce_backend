@@ -31,7 +31,7 @@ class CourierController extends Controller
 
         if($request->file('image')){
             $image_name=time().'operator'.$request['nid'].'.'.$request->file('image')->getClientOriginalExtension();
-            $request->file('image')->storeAs('public/images',$image_name);
+            $request->file('image')->storeAs('/images/courier',$image_name);
             $operator=DB::table('operators')
                         ->insert([ 
                             'name' =>$request['name'],
@@ -110,7 +110,7 @@ class CourierController extends Controller
 
         if($request->file('image')){
             $image_name=time().'operator_updated'.$request['nid'].'.'.$request->file('image')->getClientOriginalExtension();
-            $request->file('image')->storeAs('public/images',$image_name);
+            $request->file('image')->storeAs('/images/courier',$image_name);
             $operator=DB::table('operators')
                         ->where('id',$id)
                         ->update([

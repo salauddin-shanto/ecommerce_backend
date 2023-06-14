@@ -1,4 +1,11 @@
-.content{
+.cont{
     margin-top: 55px;
     /* padding: 20px; */
+}
+
+@media only screen AND (max-width:500px){
+    .cont{
+        margin-top: 125px;
+        /* padding: 20px; */
+    }
 }

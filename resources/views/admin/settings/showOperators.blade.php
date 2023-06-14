@@ -46,7 +46,7 @@
                             <tr class="">
                                 <td> 
                                     @if ($operator->image)
-                                        <img src="{{asset('storage/images/'.$operator->image)}}" class="inner-photo">
+                                        <img src="{{asset('storage/images/courier/'.$operator->image)}}" class="inner-photo">
                                     @else
                                         <span>No image found!</span>
                                     @endif

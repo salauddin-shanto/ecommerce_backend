@@ -27,7 +27,7 @@ class CategoryController extends Controller
 
         if($request->file('image')){ 
             $image_name=time().'category.'.$request->file('image')->getClientOriginalExtension();
-            $request->file('image')->storeAs('public/images/category',$image_name);
+            $request->file('image')->storeAs('/images/category',$image_name);
             $category=DB::table('categories')
                         ->insert([ 
                             'category_name' =>$request['category_name'],
@@ -81,7 +81,7 @@ class CategoryController extends Controller
 
         if($request->file('image')){
             $image_name=time().'category_updated.'.$request->file('image')->getClientOriginalExtension();
-            $request->file('image')->storeAs('public/images/category',$image_name);
+            $request->file('image')->storeAs('/images/category',$image_name);
             $category=DB::table('categories')
                         ->where('id',$id)
                         ->update([

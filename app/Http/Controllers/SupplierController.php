@@ -32,7 +32,7 @@ class SupplierController extends Controller
 
         if($request->file('image')){
             $image_name=time().'supplier'.$request['nid'].'.'.$request->file('image')->getClientOriginalExtension();
-            $request->file('image')->storeAs('public/images',$image_name);
+            $request->file('image')->storeAs('/images/supplier',$image_name);
             $supplier=DB::table('suppliers')
             ->insert([ 
                 'name' =>$request['name'],

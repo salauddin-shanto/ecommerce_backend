@@ -1,0 +1,78 @@
+.content-margin{
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 55px;
+}
+
+.form-title{
+    padding: 2px;
+    text-align: center;
+    background-color: rgb(92, 90, 90);
+    margin-left: -20px;
+    margin-right: -20px;
+    margin-bottom: 10px;
+}
+h4{
+    color: white;
+    justify-content: space-between;
+}
+h6{
+    margin-bottom: -10px;
+}
+
+.submit-btn{
+    background: green;
+    margin-top: 30px; 
+    margin-bottom: 30px; 
+    width: 100%;
+}
+
+.show-aria{
+    margin-top: 30px;
+}
+
+.divider-line{
+    margin-top: 30px;
+    height: 20px;
+    background: grey;
+}
+
+.form-upper-row{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.search-btn{
+    width: 150px;
+}
+
+.default-btn{
+    width: 185px;
+}
+
+.row{
+    margin-bottom: 20px;
+}
+
+.heading{
+    justify-content: center;
+}
+
+.sameline{
+    display: inline-block;
+    margin-right: 30px;
+}
+
+input[type="checkbox"]:checked {
+    background-color: green;
+}
+
+.form-check-label{
+    text-transform: capitalize;
+}
+
+hr{
+    color: green;
+    border-width: 2px;
+}

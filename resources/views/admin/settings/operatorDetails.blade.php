@@ -11,7 +11,7 @@
 
             <div class="picture">
                 @if ($operator->image)
-                    <img src="{{asset('storage/images/'.$operator->image)}}" class="photo">
+                    <img src="{{asset('storage/images/courier/'.$operator->image)}}" class="photo">
                 @else
                     <span>No image found!</span>
                 @endif

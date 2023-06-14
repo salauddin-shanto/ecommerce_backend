@@ -65,7 +65,7 @@
                     <tbody>
 
                         @if ($products->isEmpty())
-                            <td colspan="15">
+                            <td colspan="16">
                                 <h3 class="bg-danger">No Product found</h3>
                             </td>
 
