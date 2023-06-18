@@ -42,7 +42,8 @@
           </ul>
         </div>
       @endcan
-      
+
+{{--       
       @can('supplier add')
         <li id="submenu2" class="collapsible ">Suppliers</li>
         <div class="nested">
@@ -62,7 +63,8 @@
           </ul>
         </div>
       @endcan
-
+ --}}
+ 
       @can('category add')
         <li id="submenu4" class="collapsible" >Category</li>
         <div class="nested">

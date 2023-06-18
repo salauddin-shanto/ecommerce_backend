@@ -48,6 +48,30 @@
                             <h6>NID</h6>
                             <h5>{{$user->nid}}</h5>
                         </div>
+
+                        @if ($user->aria)
+                            <div class="info">
+                                <h6>Area</h6>
+                                <h5>{{$user->aria}}</h5>
+                            </div> 
+                        @endif
+
+                        @if ($user->address)
+                            <div class="info">
+                                <h6>Address</h6>
+                                <h5>{{$user->address}}</h5>
+                            </div>    
+                        @endif
+                        
+                        @if ($user->shop_location)
+                            <div class="info">
+                                <h6>Shop Location</h6>
+                                <h5>{{$user->shop_location}}</h5>
+                            </div> 
+                        @endif
+
+
+
                     </div>
 
 

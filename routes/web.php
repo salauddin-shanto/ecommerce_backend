@@ -34,9 +34,9 @@ Route::group(['middleware' => ['can:aria add']], function () {
 
 });
 
-
+/* 
 Route::group(['middleware' => ['can:supplier add']], function () {
-    /*Routes for supplier settings */
+    //Routes for supplier settings 
     Route::get('/show-suppliers',[SupplierController::class,'show'])->name('show-suppliers');
     Route::get('/add-supplier',[SupplierController::class,'create'])->name('add-supplier');
     Route::post('/add-supplier',[SupplierController::class,'store'])->name('add-supplier');
@@ -45,7 +45,7 @@ Route::group(['middleware' => ['can:supplier add']], function () {
 });
 
 Route::group(['middleware' => ['can:courier add']], function () {
-    /* Routes for courier settings */
+    // Routes for courier settings 
     Route::get('/add-operator',[CourierController::class,'add'])->name('add-operator');
     Route::post('/add-operator',[CourierController::class,'store'])->name('add-operator');
     Route::get('/show-operators',[CourierController::class,'show'])->name('show-operators');
@@ -56,18 +56,7 @@ Route::group(['middleware' => ['can:courier add']], function () {
     Route::post('/search-operator',[CourierController::class,'search'])->name('search-operator');
 
 });
-
-Route::group(['middleware' => ['can:customer add']], function () {
-    /* Routes for Category settings */
-    Route::get('/add-category',[CategoryController::class,'add'])->name('add-category');
-    Route::post('/add-category',[CategoryController::class,'store'])->name('add-category');
-    Route::get('/show-categories',[CategoryController::class,'show'])->name('show-categories');
-    Route::get('/category-delete/{id}',[CategoryController::class,'delete'])->name('category-delete');
-    Route::get('/category-edit/{id}',[CategoryController::class,'edit'])->name('category-edit');
-    Route::post('/category-update/{id}',[CategoryController::class,'update'])->name('category-update');
-    Route::post('/search-category',[CategoryController::class,'search'])->name('search-category');
-
-});
+ */
 
 Route::group(['middleware' => ['can:product add']], function () {
     /* Routes for product settings */
@@ -79,8 +68,22 @@ Route::group(['middleware' => ['can:product add']], function () {
     Route::post('/product-update/{id}',[productController::class,'update'])->name('product-update');
     Route::post('/search-product',[productController::class,'search'])->name('search-product');
 
-    
+
+    });
+
+
+Route::group(['middleware' => ['can:category add']], function () {
+    /* Routes for Category settings */
+    Route::get('/add-category',[CategoryController::class,'add'])->name('add-category');
+    Route::post('/add-category',[CategoryController::class,'store'])->name('add-category');
+    Route::get('/show-categories',[CategoryController::class,'show'])->name('show-categories');
+    Route::get('/category-delete/{id}',[CategoryController::class,'delete'])->name('category-delete');
+    Route::get('/category-edit/{id}',[CategoryController::class,'edit'])->name('category-edit');
+    Route::post('/category-update/{id}',[CategoryController::class,'update'])->name('category-update');
+    Route::post('/search-category',[CategoryController::class,'search'])->name('search-category');
+
 });
+
 
 Route::group(['middleware' => ['can:role add']], function () {
     /* Routes for Roles */
@@ -104,7 +107,7 @@ Route::group(['middleware' => ['can:admin add']], function () {/* Routes for Adm
     Route::get('/delete-admin/{id}',[UserController::class,'delete'])->name('delete-admin');
     Route::get('/details-admin/{id}',[UserController::class,'details'])->name('details-admin');
         
-});
+}); 
  
 
     // Routes accessible to all
@@ -119,7 +122,7 @@ Route::group(['middleware' => ['can:admin add']], function () {/* Routes for Adm
         return view('admin/customer/showCustomers');
     });
 
-
+ 
 
 
 ?>    

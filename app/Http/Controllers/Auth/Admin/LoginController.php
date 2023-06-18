@@ -12,7 +12,13 @@ use Illuminate\Support\Facades\Hash;
 class LoginController extends Controller
 {
     public function index(){
-        return view('auth/admin/login');
+        if(Auth::check()){
+            return redirect('admin-profile');
+        }
+        else{
+            return view('auth/admin/login');
+        }
+        
     }
 
     public function login(Request $request)

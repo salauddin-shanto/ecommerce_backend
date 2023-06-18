@@ -52,6 +52,9 @@ class UserController extends Controller
             'email'=>$request->input('email'),
             'password'=>Hash::make($request->input('password')) ,
             'nid'=>$request->input('nid'),
+            'aria'=>$request->input('aria'),
+            'address'=>$request->input('address'),
+            'shop_location'=>$request->input('shop_location'),
             'image'=>$imageName,
             'create_at'=>$timeDate
             
@@ -78,6 +81,8 @@ class UserController extends Controller
                     ->orWhere('user_name','like','%'.$request['search_field'].'%')
                     ->orWhere('phone','like','%'.$request['search_field'].'%')
                     ->orWhere('nid','like','%'.$request['search_field'].'%')
+                    ->orWhere('address','like','%'.$request['search_field'].'%')
+                    ->orWhere('aria','like','%'.$request['search_field'].'%')
                     ->get();
         
         return view('admin/admin/showAdmins',['users'=>$users]);
@@ -139,6 +144,9 @@ class UserController extends Controller
         $user->phone2=$request->input('phone2');
         $user->email=$request->input('email');
         $user->nid=$request->input('nid');
+        $user->aria=$request->input('aria');
+        $user->address=$request->input('address');
+        $user->shop_location=$request->input('shop_location');
         $user->updated_at=$timeDate;
 
         if($request->input('password')){            
@@ -162,75 +170,4 @@ class UserController extends Controller
         return redirect()->back()->withInput()->withErrors($request->errors());
     }
 
-/* 
-    public function search(Request $request){
-        $query=$request->input('query');
-        $users=User::where('name','like','%'.$query.'%')
-                    ->get();
-        return view('admin/admin/searchAdmins',['users'=>$users]);
-        
-    } */
 }
-
-/* 
-
-    public function show(){
-        $roles=Role::orderBy('created_at','desc')->get();
-        return view('admin/role/showRoles',['roles'=>$roles]);
-    }
-
-    public function search(Request $request){
-        $query=$request->input('query');
-        $roles=Role::where('name','like','%'.$query.'%')
-                    ->get();
-        return view('admin/role/searchResults',['roles'=>$roles]);
-        
-    }
-    public function destroy(Role $role)
-    {
-        $role->delete();
-
-        return response()->json(['message' => 'Role deleted successfully']);
-    }
-    
-    public function edit($id){
-        $role=Role::find($id);
-        $permissions=Permission::all();
-        $groups=Permission::select('group')->distinct()->get();
-        return view('admin/role/updateRole',['role'=>$role,'permissions'=>$permissions,'groups'=>$groups]);
-    }
-
-    public function update($id,Request $request){
-        $request->validate([
-            'name' => 'required|unique:roles,name,'.$id,
-            'permissions' => 'required|array',
-            'permissions.*' => 'required',
-
-        ]);
-        
-        $role=Role::find($id);
-        $role->name=$request->input('name');
-        $role->save();
-
-        $permissions=Permission::whereIn('name',$request->input('permissions'))->get();
-
-        $role->syncPermissions($permissions);
-
-        return redirect('show-roles');
-    }
-
-
-
-    public function delete($rid){
-        $role=DB::table('roles')
-                ->where('id',$id)
-                ->delete();
-
-        return redirect('show-roles');
-    } 
-
-
-
-
-
-*/

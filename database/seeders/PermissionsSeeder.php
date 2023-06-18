@@ -86,7 +86,7 @@ class PermissionsSeeder extends Seeder
                     'aria view'
                 ]
             ],
-            
+/*             
             [
                 'group'=> 'supplier',
                 'permissions' =>[
@@ -106,7 +106,7 @@ class PermissionsSeeder extends Seeder
                     'courier view'
                 ]
             ],
-
+ */
             [
                 'group'=> 'category',
                 'permissions' =>[

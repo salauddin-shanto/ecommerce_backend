@@ -126,6 +126,41 @@
                     </div>
                 </div>
 
+                <div class="row">
+                    <div class="col-md ">
+                      <label for="" class="form-label">Area</label>
+                      <input type="text" class="form-control" name="aria" value="{{old('aria')}}" id="aria">
+                      <span class="text-danger">
+                         @error('aria')
+                             {{$message}}
+                         @enderror
+                      </span>     
+                    </div>
+
+                    <div class="col-md ">
+                        <label for="" class="form-label">Address</label>
+                        <input type="text" class="form-control" name="address" value="{{old('address')}}" id="address">
+                        <span class="text-danger">
+                           @error('address')
+                               {{$message}}
+                           @enderror
+                        </span>     
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-md ">
+                        <label for="" class="form-label">Shop Location</label>
+                        <input type="text" class="form-control" name="shop_location" value="{{old('shop_location')}}" id="shop_location">
+                        <span class="text-danger">
+                           @error('shop_location')
+                               {{$message}}
+                           @enderror
+                        </span>     
+                    </div>
+                </div>
+
                 <div>
                     <button type="submit" class="btn btn-primary submit-btn">Submit</button>
                 </div>
