@@ -25,15 +25,18 @@ return new class extends Migration
             $table->decimal('prepayment_amount',12,2)->nullable();
             $table->decimal('minimum_order',12,2)->nullable();
             $table->string('status');
+            $table->decimal('available_quantity',12,2)->nullable();
             $table->date('adding_date'); 
             $table->date('expiring_date'); 
             $table->string('tags')->nullable();
             $table->string('link_products')->nullable(); 
             $table->longText('product_description')->nullable();
             $table->longText('admin_description')->nullable(); 
-            
-
             $table->timestamps();
+
+            //
+
+
         });
     }
 

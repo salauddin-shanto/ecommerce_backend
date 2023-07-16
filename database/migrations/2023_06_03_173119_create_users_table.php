@@ -20,8 +20,10 @@ return new class extends Migration
             $table->string('email')->nullable();
             $table->string('password');
             $table->string('nid');
+            $table->string('aria')->nullable();
+            $table->string('address')->nullable();
+            $table->string('shop_location')->nullable(); 
             $table->string('image');
-
             $table->timestamps(); 
         });
     }

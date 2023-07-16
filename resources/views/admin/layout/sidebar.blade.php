@@ -140,7 +140,8 @@
     </button>
     <div class="contents">
       <ul>
-        <li class="sidebar-link"><a href="{{url('/show-customers')}}">View Customer</a></li>
+        <li class="sidebar-link"><a href="{{url('/all-clients')}}">View Customer</a></li>
+        <li class="sidebar-link"><a href="{{url('/suspended-clients')}}">Suspended Customer</a></li>
       </ul>
     </div>
 
@@ -159,12 +160,16 @@
     </button>
     <div class="contents">
       <ul>
-        <li class="sidebar-link"><a href="#">Pending Orders</a></li>
-        <li class="sidebar-link"><a href="#">Order Approved</a></li>
-        <li class="sidebar-link"><a href="#">Processed Item</a></li>
-        <li class="sidebar-link"><a href="#">Received from Courier</a></li>
-        <li class="sidebar-link"><a href="#">Send to Courier</a></li>
-        <li class="sidebar-link"><a href="#">Delivered to Customer</a></li>
+        <li class="sidebar-link"><a href="{{route('orders',['status'=>'pending'])}}">Pending Orders</a></li>
+        <li class="sidebar-link"><a href="{{route('orders',['status'=>'approved'])}}">Approved Orders</a></li>
+        <li class="sidebar-link"><a href="{{route('orders',['status'=>'processed'])}}">Processed Items</a></li>
+        <li class="sidebar-link"><a href="{{route('orders',['status'=>'handed to courier manager'])}}"> To Courier Manager</a></li>
+{{--         <li class="sidebar-link"><a href="{{url('/received-from-supplier')}}">Received from Supplier</a></li>
+ --}}        
+        <li class="sidebar-link"><a href="{{route('orders',['status'=>'sent to courier'])}}">Sent to Courier</a></li>
+        <li class="sidebar-link"><a href="{{route('orders',['status'=>'delivered to customer'])}}">Delivered to Customer</a></li>
+        <li class="sidebar-link"><a href="{{route('orders',['status'=>'cancelled'])}}">Cancelled Orders</a></li>
+        <li class="sidebar-link"><a href="{{route('orders',['status'=>'returned'])}}">Returned Orders</a></li>
       </ul>
     </div>
 
@@ -180,12 +185,9 @@
     </button>
     <div class="contents">
       <ul>
-        <li class="sidebar-link"><a href="#">Pending Orders</a></li>
-        <li class="sidebar-link"><a href="#">Order Approved</a></li>
-        <li class="sidebar-link"><a href="#">Processed Item</a></li>
-        <li class="sidebar-link"><a href="#">Received from Courier</a></li>
-        <li class="sidebar-link"><a href="#">Send to Courier</a></li>
-        <li class="sidebar-link"><a href="#">Delivered to Customer</a></li>
+        <li class="sidebar-link"><a href="{{route('supply',['status'=>'approved'])}}">Products For Supply</a></li>
+        <li class="sidebar-link"><a href="{{route('supply',['status'=>'processed'])}}">Processed Orders</a></li>
+        <li class="sidebar-link"><a href="{{route('supply',['status'=>'handed to courier manager'])}}">To Courier Manager</a></li>
       </ul>
     </div>
 

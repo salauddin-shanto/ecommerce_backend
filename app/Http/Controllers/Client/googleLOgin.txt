@@ -1,0 +1,25 @@
+Troubleshooting info:
+  Principal: salauddin916854@gmail.com
+  Resource: single-cirrus-346414
+  Troubleshooting URL: console.cloud.google.com/iam-admin/troubleshooter;permissions=resourcemanager.projects.get,serviceusage.services.list;principal=salauddin916854@gmail.com;resources=%2F%2Fcloudresourcemanager.googleapis.com%2Fprojects%2Fsingle-cirrus-346414,%2F%2Fcloudresourcemanager.googleapis.com%2Fprojects%2Fsingle-cirrus-346414
+
+Missing permissions:
+  resourcemanager.projects.get
+  serviceusage.services.list
+
+
+login/google/callback
+
+Client ID
+505711802889-oqsl9rgchivie3impmjo9kb99j7l79kc.apps.googleusercontent.com
+Client secret
+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
+Creation date
+22 June 2023 at 23:08:52 GMT+6
+Status
+Enabled
+
+
+
+505711802889-oqsl9rgchivie3impmjo9kb99j7l79kc.apps.googleusercontent.com
+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

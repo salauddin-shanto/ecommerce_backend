@@ -1,0 +1,567 @@
+1. Client Table:
+   - client_id (Primary Key)
+   - name
+   - email
+   - phone
+   - address
+   - ...
+
+2. Admins Table:
+   - admin_id (Primary Key)
+   - name
+   - phone
+   - email
+   - password (hashed)
+   - role
+   - address
+   - ...
+
+3. Product Table:
+   - id (Primary Key)
+   - name
+   - description
+   - price
+   - ...
+
+4. Order Table:
+   - order_id (Primary Key)
+   - client_id (Foreign Key referencing Client Table)
+   - order_date
+   - total_amount
+   - status_id (Foreign Key referencing Delivery_Status Table)
+   - payment_status
+   - ...
+
+5. OrderItem Table:
+   - order_item_id (Primary Key)
+   - order_id (Foreign Key referencing Order Table)
+   - product_id (Foreign Key referencing Product Table)
+   - quantity
+   - price
+   - ...
+
+6. Delivery_Status Table:
+   - status_id (Primary Key)
+   - name
+   - description
+
+7. Shipment Table:
+   - shipment_id (Primary Key)
+   - order_id (Foreign Key referencing Order Table)
+   - shipment_date
+   - carrier
+   - tracking_number
+   - ...
+
+8. Payment_Methods Table:
+   - method_id (Primary Key)
+   - name
+   - description
+
+9. Payments Table:
+   - payment_id (Primary Key)
+   - order_id (Foreign Key referencing Order Table)
+   - method_id (Foreign Key referencing Payment_Methods Table)
+   - payment_status
+   - payment_date
+   - transaction_id
+   - billing_address
+   - amount
+   - due
+
+10. Refund Table:
+    - refund_id (Primary Key)
+    - order_id (Foreign Key referencing Order Table)
+    - refund_status
+    - method_id (Foreign Key referencing Payment_Methods Table)
+    - refund_amount
+    - refund_reason
+    - refund_date
+    - refund_transaction_id
+    - ...
+
+11. Cart Table:
+    - cart_id (Primary Key)
+    - client_id (Foreign Key referencing Client Table)
+    - product_id (Foreign Key referencing Product Table)
+    - amount
+    - total_price
+
+12. Client_types Table:
+    - client_type_id (Primary Key)
+    - name
+    - average_order_value
+    - description
+
+13. Client_statistics Table:
+    - client_statistics_id (Primary Key)
+    - client_id (Foreign Key referencing Client Table)
+    - total_order
+    - minimum_order_value
+    - maximum_order_value
+    - total_order_amount
+    - average_order_value
+    - client_type_id (Foreign Key referencing Client_types Table)
+    - last_activity
+
+##############################################################
+
+
+
+##############################################################
+Relatioship Definitions
+Here's a summary of the relationships for the updated database schema:
+
+1. Client Table:
+   - One-to-Many relationship with Order Table (client_id in Order).
+   - Many-to-Many relationship with Product Table (client_product pivot table).
+   - One-to-Many relationship with Cart Table (client_id in Cart).
+   - One-to-One relationship with ClientStatistics Table (client_id in ClientStatistics).
+
+2. Admins Table:
+   No specific relationships mentioned in the provided schema.
+
+3. Product Table:
+   - One-to-Many relationship with OrderItem Table (product_id in OrderItem).
+   - Many-to-Many relationship with Client Table (client_product pivot table).
+   - Many-to-Many relationship with Cart Table (cart_product pivot table).
+
+4. Order Table:
+   - One-to-Many relationship with OrderItem Table (order_id in OrderItem).
+   - One-to-One relationship with Shipment Table (order_id in Shipment).
+   - One-to-One relationship with Payments Table (order_id in Payments).
+   - One-to-One relationship with Refund Table (order_id in Refund).
+   - Many-to-One relationship with Client Table (client_id in Order).
+   - Many-to-One relationship with Delivery_Status Table (status_id in Order).
+
+5. OrderItem Table:
+   - Many-to-One relationship with Order Table (order_id in OrderItem).
+   - Many-to-One relationship with Product Table (product_id in OrderItem).
+
+6. Delivery_Status Table:
+   - One-to-Many relationship with Order Table (status_id in Order).
+
+7. Shipment Table:
+   - One-to-One relationship with Order Table (order_id in Shipment).
+
+8. Payment_Methods Table:
+   - One-to-Many relationship with Payments Table (method_id in Payments).
+   - One-to-Many relationship with Refund Table (method_id in Refund).
+
+9. Payments Table:
+   - One-to-One relationship with Order Table (order_id in Payments).
+   - Many-to-One relationship with Payment_Methods Table (method_id in Payments).
+
+10. Refund Table:
+    - One-to-One relationship with Order Table (order_id in Refund).
+    - Many-to-One relationship with Payment_Methods Table (method_id in Refund).
+
+11. Cart Table:
+    - Many-to-One relationship with Client Table (client_id in Cart).
+    - Many-to-Many relationship with Product Table (cart_product pivot table).
+
+12. Client_types Table:
+    - One-to-Many relationship with Client Table (client_type_id in Client).
+
+13. Client_statistics Table:
+    - One-to-One relationship with Client Table (client_id in Client_statistics).
+    - Many-to-One relationship with Client_types Table (client_type_id in Client_statistics).
+
+These relationships should provide a comprehensive and consistent order management 
+structure for an e-commerce website. Please make sure to update your database schema 
+and Laravel model definitions accordingly.
+##############################################################
+
+
+##############################################################
+Laravel Model Definitions:
+
+1. Client Model:
+```php
+class Client extends Model {
+    public function orders() {
+        return $this->hasMany(Order::class);
+    }
+
+    public function products() {
+        return $this->belongsToMany(Product::class);
+    }
+
+    public function cart() {
+        return $this->hasMany(Cart::class);
+    }
+
+    public function statistics() {
+        return $this->hasOne(ClientStatistics::class);
+    }
+}
+```
+
+2. Admin Model:
+```php
+class Admin extends Model {
+    // Model definition without relationships
+}
+```
+
+3. Product Model:
+```php
+class Product extends Model {
+    public function orderItems() {
+        return $this->hasMany(OrderItem::class);
+    }
+
+    public function clients() {
+        return $this->belongsToMany(Client::class);
+    }
+
+    public
+
+ function carts() {
+        return $this->belongsToMany(Cart::class);
+    }
+}
+```
+
+4. Order Model:
+```php
+class Order extends Model {
+    public function orderItems() {
+        return $this->hasMany(OrderItem::class);
+    }
+
+    public function shipment() {
+        return $this->hasOne(Shipment::class);
+    }
+
+    public function payment() {
+        return $this->hasOne(Payment::class);
+    }
+
+    public function refund() {
+        return $this->hasOne(Refund::class);
+    }
+
+    public function client() {
+        return $this->belongsTo(Client::class);
+    }
+
+    public function status() {
+        return $this->belongsTo(DeliveryStatus::class);
+    }
+}
+```  
+
+5. OrderItem Model:
+```php
+class OrderItem extends Model {
+    public function order() {
+        return $this->belongsTo(Order::class);
+    }
+
+    public function product() {
+        return $this->belongsTo(Product::class);
+    }
+}
+```
+
+6. DeliveryStatus Model:
+```php
+class DeliveryStatus extends Model {
+    public function orders() {
+        return $this->hasMany(Order::class);
+    }
+}
+```
+
+7. Shipment Model:
+```php
+class Shipment extends Model {
+    public function order() {
+        return $this->belongsTo(Order::class);
+    }
+}
+```
+
+8. PaymentMethods Model:
+```php
+class PaymentMethods extends Model {
+    public function payments() {
+        return $this->hasMany(Payment::class);
+    }
+
+    public function refunds() {
+        return $this->hasMany(Refund::class);
+    }
+}
+```
+
+9. Payment Model:
+```php
+class Payment extends Model {
+    public function order() {
+        return $this->belongsTo(Order::class);
+    }
+
+    public function method() {
+        return $this->belongsTo(PaymentMethods::class);
+    }
+}
+```
+
+10. Refund Model:
+```php
+class Refund extends Model {
+    public function order() {
+        return $this->belongsTo(Order::class);
+    }
+
+    public function method() {
+        return $this->belongsTo(PaymentMethods::class);
+    }
+}
+```
+
+11. Cart Model:
+```php
+class Cart extends Model {
+    public function client() {
+        return $this->belongsTo(Client::class);
+    }
+
+    public function products() {
+        return $this->belongsToMany(Product::class);
+    }
+}
+```
+
+12. ClientTypes Model:
+```php
+class ClientTypes extends Model {
+    public function clients() {
+        return $this->hasMany(Client::class);
+    }
+}
+```
+
+13. ClientStatistics Model:
+```php
+class ClientStatistics extends Model {
+    public function client() {
+        return $this->belongsTo(Client::class);
+    }
+
+    public function clientType() {
+        return $this->belongsTo(ClientTypes::class);
+    }
+}
+```
+
+Please note that these Laravel model definitions assume you have properly configured 
+your database connection and table names. Also, make sure to adjust the model class 
+names and file locations according to your Laravel application's structure.
+With these updated relationships and model definitions, you should have a consistent 
+order management system for your e-commerce website.
+##############################################################
+
+
+
+
+
+##############################################################
+Database migrations
+Here's an implementation of the Laravel database migrations for the updated schema:
+
+1. Create "clients" table migration:
+```php
+Schema::create('clients', function (Blueprint $table) {
+    $table->id('client_id');
+    $table->string('name');
+    $table->string('email')->unique();
+    $table->string('phone');
+    $table->string('address');
+    // ...
+    $table->timestamps();
+});
+```
+
+2. Create "admins" table migration:
+```php
+Schema::create('admins', function (Blueprint $table) {
+    $table->id('admin_id');
+    $table->string('name');
+    $table->string('email')->unique();
+    $table->string('phone');
+    $table->string('password');
+    $table->string('role');
+    $table->string('address');
+    // ...
+    $table->timestamps();
+});
+```
+
+3. Create "products" table migration:
+```php
+Schema::create('products', function (Blueprint $table) {
+    $table->id('product_id');
+    $table->string('name');
+    $table->string('description');
+    $table->decimal('price', 8, 2);
+    // ...
+    $table->timestamps();
+});
+```
+
+4. Create "orders" table migration:
+```php
+Schema::create('orders', function (Blueprint $table) {
+    $table->id('order_id');
+    $table->unsignedBigInteger('client_id');
+    $table->foreign('client_id')->references('id')->on('clients');
+    $table->date('order_date');
+    $table->decimal('total_price',10,2);
+    $table->unsignedBigInteger('status_id');
+    $table->foreign('status_id')->references('status_id')->on('delivery_statuses');
+    $table->string('payment_status');
+    // ...
+    $table->timestamps();
+});
+```
+
+5. Create "order_items" table migration:
+```php
+Schema::create('order_items', function (Blueprint $table) {
+    $table->id('order_item_id');
+    $table->unsignedBigInteger('order_id');
+    $table->foreign('order_id')->references('order_id')->on('orders');
+    $table->unsignedBigInteger('product_id');
+    $table->foreign('product_id')->references('product_id')->on('products');
+    $table->integer('quantity');
+    $table->decimal('item_price', 10, 2);
+    // ...
+    $table->timestamps();
+});
+```
+
+6. Create "delivery_statuses" table migration:
+```php
+Schema::create('delivery_statuses', function (Blueprint $table) {
+    $table->id('status_id');
+    $table->string('name');
+    $table->string('description');
+    // ...
+    $table->timestamps();
+});
+```
+
+7. Create "shipments" table migration:
+```php
+Schema::create('shipments', function (Blueprint $table) {
+    $table->id('shipment_id');
+    $table->unsignedBigInteger('order_id');
+    $table->foreign('order_id')->references('order_id')->on('orders');
+    $table->date('shipment_date');
+    $table->string('carrier');
+    $table->string('tracking_number');
+    // ...
+    $table->timestamps();
+});
+```
+
+8. Create "payment_methods" table migration:
+```php
+Schema::create('payment_methods', function (Blueprint $table) {
+    $table->id('method_id');
+    $table->string('name');
+    $table->string('description');
+    $table->timestamps();
+});
+```
+
+9. Create "payments"
+
+ table migration:
+```php
+Schema::create('payments', function (Blueprint $table) {
+    $table->id('payment_id');
+    $table->unsignedBigInteger('order_id');
+    $table->foreign('order_id')->references('order_id')->on('orders');
+    $table->unsignedBigInteger('method_id');
+    $table->foreign('method_id')->references('method_id')->on('payment_methods');
+    $table->string('payment_status');
+    $table->date('payment_date');
+    $table->string('transaction_id');
+    $table->string('billing_address');
+    $table->decimal('amount', 10, 2);
+    $table->decimal('due', 10, 2);
+    $table->timestamps();
+});
+```
+
+10. Create "refunds" table migration:
+```php
+Schema::create('refunds', function (Blueprint $table) {
+    $table->id('refund_id');
+    $table->unsignedBigInteger('order_id');
+    $table->foreign('order_id')->references('order_id')->on('orders');
+    $table->string('refund_status');
+    $table->unsignedBigInteger('method_id');
+    $table->foreign('method_id')->references('method_id')->on('payment_methods');
+    $table->decimal('refund_amount', 8, 2);
+    $table->string('refund_reason');
+    $table->date('refund_date');
+    $table->string('refund_transaction_id');
+    // ...
+    $table->timestamps();
+});
+```
+
+11. Create "carts" table migration:
+```php
+Schema::create('carts', function (Blueprint $table) {
+    $table->id('cart_id');
+    $table->unsignedBigInteger('client_id');
+    $table->foreign('client_id')->references('client_id')->on('clients');
+    $table->unsignedBigInteger('product_id');
+    $table->foreign('product_id')->references('product_id')->on('products');
+    $table->integer('amount');
+    $table->decimal('total_price', 8, 2);
+    // ...
+    $table->timestamps();
+});
+```
+
+12. Create "client_types" table migration:
+```php
+Schema::create('client_types', function (Blueprint $table) {
+    $table->id('client_type_id');
+    $table->string('name');
+    $table->decimal('average_order_value', 8, 2);
+    $table->string('description');
+    // ...
+    $table->timestamps();
+});
+```
+
+13. Create "client_statistics" table migration:
+```php
+Schema::create('client_statistics', function (Blueprint $table) {
+    $table->id('client_statistics_id');
+    $table->unsignedBigInteger('client_id');
+    $table->foreign('client_id')->references('client_id')->on('clients');
+    $table->integer('total_order');
+    $table->decimal('minimum_order_value', 10, 2);
+    $table->decimal('maximum_order_value', 10, 2);
+    $table->decimal('total_order_amount', 10, 2);
+    $table->decimal('average_order_value', 10, 2);
+    $table->unsignedBigInteger('client_type_id');
+    $table->foreign('client_type_id')->references('client_type_id')->on('client_types');
+    $table->date('last_activity');
+    // ...
+    $table->timestamps();
+});
+```
+
+These Laravel migrations will create the necessary database tables with the specified 
+columns and relationships. Make sure to run these migrations using the `php artisan 
+migrate` command.

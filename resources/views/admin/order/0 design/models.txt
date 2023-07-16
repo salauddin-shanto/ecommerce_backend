@@ -1,0 +1,410 @@
+Certainly! Here's the complete code for the models with the necessary fillable arrays and relationships:
+
+1. Client.php:
+```php
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Client extends Model
+{
+    protected $primaryKey = 'client_id';
+
+    protected $fillable = [
+        'name',
+        'email',
+        'phone',
+        'address',
+        // ...
+    ];
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class, 'client_id', 'client_id');
+    }
+
+    public function carts()
+    {
+        return $this->hasMany(Cart::class, 'client_id', 'client_id');
+    }
+
+    public function clientStatistics()
+    {
+        return $this->hasOne(ClientStatistics::class, 'client_id', 'client_id');
+    }
+
+    public function clientType()
+    {
+        return $this->belongsTo(ClientType::class, 'client_type_id', 'client_type_id');
+    }
+}
+```
+
+2. Admin.php:
+```php
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Admin extends Model
+{
+    protected $primaryKey = 'admin_id';
+
+    protected $fillable = [
+        'name',
+        'email',
+        'phone',
+        'password',
+        'role',
+        'address',
+        // ...
+    ];
+}
+```
+
+3. Product.php:
+```php
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Product extends Model
+{
+    protected $primaryKey = 'product_id';
+
+    protected $fillable = [
+        'name',
+        'description',
+        'price',
+        // ...
+    ];
+
+    public function orderItems()
+    {
+        return $this->hasMany(OrderItem::class, 'product_id', 'product_id');
+    }
+
+    public function clients()
+    {
+        return $this->belongsToMany(Client::class, 'client_product', 'product_id', 'client_id');
+    }
+
+    public function carts()
+    {
+        return $this->belongsToMany(Cart::class, 'cart_product', 'product_id', 'cart_id');
+    }
+}
+```
+
+4. Order.php:
+```php
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Order extends Model
+{
+    protected $primaryKey = 'order_id';
+
+    protected $fillable = [
+        'client_id',
+        'order_date',
+        'total_amount',
+        'status_id',
+        'payment_status',
+        // ...
+    ];
+
+    public function client()
+    {
+        return $this->belongsTo(Client::class, 'client_id', 'id');
+    }
+
+    public function orderItems()
+    {
+        return $this->hasMany(OrderItem::class, 'order_id', 'order_id');
+    }
+
+    public function shipment()
+    {
+        return $this->hasOne(Shipment::class, 'order_id', 'order_id');
+    }
+
+    public function payment()
+    {
+        return $this->hasOne(Payment::class, 'order_id', 'order_id');
+    }
+
+    public function refund()
+    {
+        return $this->hasOne(Refund::class, 'order_id', 'order_id');
+    }
+
+    public function status()
+    {
+        return $this->belongsTo(DeliveryStatus::class, 'status_id', 'status_id');
+    }
+}
+```
+
+5. OrderItem.php:
+```php
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class OrderItem extends Model
+{
+    protected $primaryKey = 'order_item_id';
+
+    protected $fillable = [
+        'order_id',
+        'product_id',
+        'quantity',
+        'price',
+        // ...
+    ];
+
+    public function order()
+    {
+        return $this->belongsTo(Order::class, 'order_id', 'order_id');
+    }
+
+    public function product()
+    {
+        return $this->belongsTo(Product::class, 'product_id', 'product_id');
+    }
+}
+```
+
+6. DeliveryStatus.php:
+```php
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class DeliveryStatus extends Model
+{
+    protected $primaryKey = 'status_id';
+
+    protected $fillable = [
+        'name',
+        'description',
+        // ...
+    ];
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class, 'status_id', 'status_id');
+    }
+}
+```
+
+7. Shipment.php:
+```php
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Shipment extends Model
+{
+    protected $primaryKey = 'shipment_id';
+
+    protected $fillable = [
+        'order_id',
+        'shipment_date',
+        'carrier',
+        'tracking_number',
+        // ...
+    ];
+
+    public function order()
+    {
+        return $this->belongsTo(Order::class, 'order_id', 'order_id');
+    }
+}
+```
+
+8. PaymentMethods.php:
+```php
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class PaymentMethods extends Model
+{
+    protected $primaryKey = 'method_id';
+
+    protected $fillable = [
+        'name',
+        'description',
+        // ...
+    ];
+
+    public function payments()
+    {
+        return $this->hasMany(Payment::class, 'method_id', 'method_id');
+    }
+
+    public function refunds()
+    {
+        return $this->hasMany(Refund::class, 'method_id', 'method_id');
+    }
+}
+```
+
+9. Payment.php:
+```php
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Payment extends Model
+{
+    protected $primaryKey = 'payment_id';
+
+    protected $fillable = [
+        'order_id',
+        'method_id',
+        'payment_status',
+        'payment_date',
+        'transaction_id',
+        'billing_address',
+        'amount',
+        // ...
+    ];
+
+    public function order()
+    {
+        return $this->belongsTo(Order::class, 'order_id', 'order_id');
+    }
+
+    public function method()
+    {
+        return $this->belongsTo(PaymentMethods::class, 'method_id', 'method_id');
+    }
+}
+```
+
+10. Refund.php:
+```php
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Refund extends Model
+{
+    protected $primaryKey = 'refund_id';
+
+    protected $fillable = [
+        'order_id',
+        'refund_status',
+        'method_id',
+        'refund_amount',
+        'refund_reason',
+        'refund_date',
+        'refund_transaction_id',
+        // ...
+    ];
+
+    public function order()
+    {
+        return $this->belongsTo(Order::class, 'order_id', 'order_id');
+    }
+
+    public function method()
+    {
+        return $this->belongsTo(PaymentMethods::class, 'method_id', 'method_id');
+    }
+}
+```
+
+11. Cart.php:
+```php
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Cart extends Model
+{
+    protected $primaryKey = 'cart_id';
+
+    protected $fillable = [
+        'client_id',
+        'product_id',
+        'amount',
+        'total_price',
+        // ...
+    ];
+
+    public function client()
+    {
+        return $this->belongsTo(Client::class, 'client_id', 'client_id');
+    }
+
+    public function product()
+    {
+        return $this->belongsTo(Product::class, 'product_id', 'product_id');
+    }
+}
+```
+
+12. ClientType.php:
+```php
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class ClientType extends Model
+{
+    protected $primaryKey = 'client_type_id';
+
+    protected $fillable = [
+        'name',
+        'average_order_value',
+        'description',
+        // ...
+    ];
+
+    public function clients()
+    {
+        return $this->hasMany(Client::class, 'client_type_id', 'client_type_id');
+    }
+}
+```
+
+13. ClientStatistics.php:
+```php
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class ClientStatistics extends Model
+{
+    protected $primaryKey = 'client_category_id';
+
+    protected $fillable = [
+        'client_id',
+        'total_order',
+        'minimum_order_value',
+        'maximum_order_value',
+        'total_order_amount',
+        'average_order_value',
+        'client_type_id',
+        'last_activity',
+        // ...
+    ];
+
+    public function client()
+    {
+        return $this->belongsTo(Client::class, 'client_id', 'client_id');
+    }
+
+    public function clientType()
+    {
+        return $this->belongsTo(ClientType::class, 'client_type_id', 'client_type_id');
+    }
+}
+```
+
+These models define the necessary fillable arrays and relationships for the order management system. Remember to customize the code based on your specific requirements and project structure.

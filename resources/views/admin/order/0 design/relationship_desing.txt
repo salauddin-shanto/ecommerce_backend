@@ -1,0 +1,60 @@
+Here's a summary of the relationships for the updated database schema:
+
+1. Client Table:
+   - One-to-Many relationship with Order Table (client_id in Order).
+   - Many-to-Many relationship with Product Table (client_product pivot table).
+   - One-to-Many relationship with Cart Table (client_id in Cart).
+   - One-to-One relationship with ClientStatistics Table (client_id in ClientStatistics).
+
+2. Admins Table:
+   No specific relationships mentioned in the provided schema.
+
+3. Product Table:
+   - One-to-Many relationship with OrderItem Table (product_id in OrderItem).
+   - Many-to-Many relationship with Client Table (client_product pivot table).
+   - Many-to-Many relationship with Cart Table (cart_product pivot table).
+
+4. Order Table:
+   - One-to-Many relationship with OrderItem Table (order_id in OrderItem).
+   - One-to-One relationship with Shipment Table (order_id in Shipment).
+   - One-to-One relationship with Payments Table (order_id in Payments).
+   - One-to-One relationship with Refund Table (order_id in Refund).
+   - Many-to-One relationship with Client Table (client_id in Order).
+   - Many-to-One relationship with Delivery_Status Table (status_id in Order).
+
+5. OrderItem Table:
+   - Many-to-One relationship with Order Table (order_id in OrderItem).
+   - Many-to-One relationship with Product Table (product_id in OrderItem).
+
+6. Delivery_Status Table:
+   - One-to-Many relationship with Order Table (status_id in Order).
+
+7. Shipment Table:
+   - One-to-One relationship with Order Table (order_id in Shipment).
+
+8. Payment_Methods Table:
+   - One-to-Many relationship with Payments Table (method_id in Payments).
+   - One-to-Many relationship with Refund Table (method_id in Refund).
+
+9. Payments Table:
+   - One-to-One relationship with Order Table (order_id in Payments).
+   - Many-to-One relationship with Payment_Methods Table (method_id in Payments).
+
+10. Refund Table:
+    - One-to-One relationship with Order Table (order_id in Refund).
+    - Many-to-One relationship with Payment_Methods Table (method_id in Refund).
+
+11. Cart Table:
+    - Many-to-One relationship with Client Table (client_id in Cart).
+    - Many-to-Many relationship with Product Table (cart_product pivot table).
+
+12. Client_types Table:
+    - One-to-Many relationship with Client Table (client_type_id in Client).
+
+13. Client_statistics Table:
+    - One-to-One relationship with Client Table (client_id in Client_statistics).
+    - Many-to-One relationship with Client_types Table (client_type_id in Client_statistics).
+
+These relationships should provide a comprehensive and consistent order management 
+structure for an e-commerce website. Please make sure to update your database schema 
+and Laravel model definitions accordingly.

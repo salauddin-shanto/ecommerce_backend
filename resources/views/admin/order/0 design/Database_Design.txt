@@ -1,0 +1,105 @@
+1. Client Table:
+   - client_id (Primary Key)
+   - name
+   - email
+   - phone
+   - address
+   - ...
+
+2. Admins Table:
+   - admin_id (Primary Key)
+   - name
+   - phone
+   - email
+   - password (hashed)
+   - role
+   - address
+   - ...
+
+3. Product Table:
+   - product_id (Primary Key)
+   - name
+   - description
+   - price
+   - ...
+
+4. Order Table:
+   - order_id (Primary Key)
+   - client_id (Foreign Key referencing Client Table)
+   - order_date
+   - total_price
+   - status_id(Foreign Key references Delivery_Status Table)
+   - payment_status
+   - ...
+
+5. OrderItem Table:
+   - order_item_id (Primary Key)
+   - order_id (Foreign Key referencing Order Table)
+   - product_id (Foreign Key referencing Product Table)
+   - quantity
+   - item_price (multiplied product price by quantity)
+   - ...
+
+6. Delivery_Status Table:
+   - status_id (Primary Key)
+   - name
+   - description
+
+7. Shipment Table:
+   - shipment_id (Primary Key)
+   - order_id (Foreign Key referencing Order Table)
+   - shipment_date
+   - carrier
+   - tracking_number
+   - ...
+
+8. Payment_Methods Table:
+   - method_id (Primary Key)
+   - name
+   - description
+
+9. Payments Table:
+   - payment_id (Primary Key)
+   - order_id (Foreign Key referencing Order Table)
+   - method_id (Foreign Key references Payment_Methods.method_id),
+   - payment_status
+   - payment_date
+   - transaction_id
+   - billing_address
+   - amount
+
+10. Refund Table:
+    - refund_id (Primary Key)
+    - order_id (Foreign Key referencing Order Table)
+    - refund_status
+    - method_id (Foreign Key referencing Payment_Methods Table)
+    - refund_amount
+    - refund_reason
+    - refund_date
+    - refund_transaction_id
+    - ...
+
+11. Cart Table:
+    - cart_id (Primary Key)
+    - client_id (Foreign Key referencing Client Table)
+    - product_id (Foreign Key referencing Product Table)
+    - amount
+    - total_price
+
+12. Client_types Table:
+    - client_type_id (Primary Key)
+    - name
+    - average_order_value
+    - description
+
+13. Client_statistics Table:
+    - client_statistics_id (Primary Key)
+    - client_id (Foreign Key referencing Client Table)
+    - total_order
+    - minimum_order_value
+    - maximum_order_value
+    - total_order_amount
+    - average_order_value
+    - client_type_id (Foreign Key referencing Client_types Table)
+    - last_activity
+

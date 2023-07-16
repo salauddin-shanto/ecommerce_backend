@@ -146,9 +146,8 @@
                            @enderror
                         </span>     
                     </div>
-
                 </div>
-
+{{-- 
                 <div class="row">
                     <div class="col-md ">
                         <label for="" class="form-label">Shop Location</label>
@@ -160,7 +159,7 @@
                         </span>     
                     </div>
                 </div>
-
+ --}}
                 <div>
                     <button type="submit" class="btn btn-primary submit-btn">Submit</button>
                 </div>

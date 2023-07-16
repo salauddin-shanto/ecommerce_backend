@@ -1,0 +1,72 @@
+.content-margin{
+    margin: 20px;
+    margin-left: 20px;
+    margin-top: 15px;
+}
+.card {
+    border: none;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  }
+.card-title{
+    text-align: center;
+}
+
+.profile-pic{
+    text-align: center;
+
+}
+.photo{
+    border-radius: 50%;
+    width: 150px;
+    margin-bottom: 30px;
+}
+
+.edit{
+    font-size: 30px;
+    text-align: center;
+}
+
+.edit-click{
+    color: green;
+    margin-top: 30px;
+}
+
+.info-section{
+    margin-bottom: 30px;
+}
+
+.info{
+    background: whitesmoke;
+    margin-bottom: 20px;
+    margin-left: 50px;
+}
+
+h6{
+    font-weight: normal;
+}
+
+.roles-section{
+    background: whitesmoke;
+    margin-bottom: 40px;
+    padding: 20px;
+}
+
+.roles-header{
+    color: black;
+}
+
+.roles-header:hover{
+    color: blue;
+}
+
+.roles{
+    color: green;
+}
+
+.permissions-section{
+    background: whitesmoke;
+    padding: 20px;
+}
+.permissions{
+    color: rgb(72, 25, 191);
+}

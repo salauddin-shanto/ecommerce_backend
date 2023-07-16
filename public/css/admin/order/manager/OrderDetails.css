@@ -1,0 +1,92 @@
+.content-margin{
+    margin: 20px;
+    margin-left: 20px;
+    margin-top: 55px;
+}
+
+.card-title{
+    text-align: center;
+    color: green;
+    text-transform: capitalize;
+}
+
+.profile-pic{
+    text-align: center;
+
+}
+.photo{
+    border-radius: 50%;
+    width: 150px;
+    margin-bottom: 30px;
+}
+
+.edit{
+    font-size: 30px;
+    text-align: center;
+}
+
+.edit-click{
+    color: green;
+    margin-top: 30px;
+}
+
+.info{
+    background: whitesmoke;
+    margin-bottom: 20px;
+}
+
+h6{
+    font-weight: normal;
+}
+
+
+
+img{
+    width: 200px;
+}
+/* 
+.customer-details{
+    background-color: rgb(151, 154, 151);
+}
+ */
+
+
+.customer-details-header{
+    margin-top: 30px;
+    background-color: white;
+}
+.customer-details-header h4{
+    color: green;
+}
+
+.approve-section{
+    margin-top: 50px;
+    background-color: gray;
+    padding:10px 10px 10px 10px;
+    align-items: center;
+}
+
+.payement-info{
+    margin-top: 20px;
+}
+
+.supplier-name:hover{
+    background-color: rgb(105, 23, 205);
+}
+
+
+
+.last-card{
+    margin-top: 40px;
+    background-color: rgb(213, 220, 220);
+}
+.supply-approve{
+    margin: 10px;
+}
+.receive{
+    width: 100%;
+}
+
+a{
+    justify-content: center;
+}

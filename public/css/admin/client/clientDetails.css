@@ -1,0 +1,86 @@
+.content-margin{
+    margin: 20px;
+    margin-top: 50px;
+}
+
+.title{
+    text-align: center;
+    justify-content: center;
+}
+
+.card {
+    border: none;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+.card-header{
+    display: flex;
+    justify-content: space-between;
+}
+
+.edit-button{
+    margin-left: 20px;
+}
+.info-type{
+    margin-bottom: 50px;
+}
+/* 
+.mb-3{
+    margin-left: 50px;
+}
+ */
+
+hr{
+    color: green;
+    height: 2px;
+    margin-left: -17px;
+    margin-right: -17px;
+}
+
+.contact-informations .info-title hr,
+.banking-informations .info-title hr
+{
+    color: green;
+    height: 2px;
+    margin-left: -7px;
+    margin-right: -17px;
+}
+
+input[type='text'],
+input[type='email'],
+input[type='tel'],
+input[type='date']
+{
+    font-size: large;
+    font-weight: bold;
+    color: black;
+    width: 80%;
+}
+
+.text-area{
+    width: 80%;
+}
+
+/* .info-type{
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    padding: 30px;
+}
+ */
+
+.submit{
+    width: 100%;
+}
+
+.submit-button{
+    display: none;
+}
+
+.Email{
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+}
+
+.google-login{
+    display: none;
+}

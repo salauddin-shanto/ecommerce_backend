@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Order\Order;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Model;
@@ -22,4 +23,8 @@ class User extends Authenticatable
         'password',
         'image',
     ];
+
+    public function orders(){
+        return $this->hasMany(Order::class, 'supplier_id','id');
+    }
 }

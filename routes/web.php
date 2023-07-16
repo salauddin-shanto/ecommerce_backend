@@ -1,16 +1,23 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\AriaController;
 use App\Http\Controllers\CourierController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SupplierController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UnitController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Admin\Role\RoleController;
-use App\Http\Controllers\Auth\Admin\LoginController;
+use App\Http\Controllers\Admin\Auth\AdminLoginController;
+use App\Http\Controllers\Client\ClientLoginController;
+use App\Http\Controllers\Client\ClientRegistrationController;
 use App\Models\Units;
+use App\Http\Controllers\client\ClientController;
+use App\Http\Controllers\Frontend\Cart\CartController;
+use App\Http\Controllers\Frontend\Home\homePageController;
+use App\Http\Controllers\Order\OrderController;
 
 Route::group(['middleware' => ['can:unit add']], function () {
     /* Routes for unit-settings */ 
@@ -26,6 +33,7 @@ Route::group(['middleware' => ['can:unit add']], function () {
 Route::group(['middleware' => ['can:aria add']], function () {
     /* Routes for area-settings */ 
     Route::get('/add-area',[AriaController::class,'addArea'])->name('add-area');
+    Route::post('/add-area',[AriaController::class,'storeArea'])->name('add-area');
     Route::get('/show-areas',[AriaController::class,'showAreas'])->name('show-areas');
     Route::post('/show-areas/filter',[AriaController::class,'filter'])->name('show-areas.filter');
     Route::get('/area-edit/{aria_id}',[AriaController::class,'edit'])->name('area-edit');
@@ -108,21 +116,61 @@ Route::group(['middleware' => ['can:admin add']], function () {/* Routes for Adm
     Route::get('/details-admin/{id}',[UserController::class,'details'])->name('details-admin');
         
 }); 
- 
+  
 
     // Routes accessible to all
-    Route::get('/admin-login',[LoginController::class,'index'])->name('admin-login');
-    Route::post('/admin-login',[LoginController::class,'login'])->name('admin-login');
-    Route::get('/admin-profile',[LoginController::class,'profile'])->name('admin-profile');
-    Route::get('/admin-logout',[LoginController::class,'logout'])->name('admin-logout');
-    Route::post('/admin-password-reset/{id}',[LoginController::class,'passwordReset'])->name('admin-password-reset');
+    Route::get('/admin-login',[AdminLoginController::class,'index'])->name('admin-login');
+    Route::post('/admin-login',[AdminLoginController::class,'login'])->name('admin-login');
+    Route::get('/admin-profile',[AdminLoginController::class,'profile'])->name('admin-profile');
+    Route::get('/admin-logout',[AdminLoginController::class,'logout'])->name('admin-logout');
+    Route::post('/admin-password-reset/{id}',[AdminLoginController::class,'passwordReset'])->name('admin-password-reset');
 
 
-    Route::get('/show-customers',function(){
-        return view('admin/customer/showCustomers');
-    });
+    // Routes for Client Management
+    Route::get('/all-clients',[ClientController::class,'show'])->name('all-clients');             
+    Route::post('/search-client',[ClientController::class,'search'])->name('search-client');             
+    Route::get('/suspend-client/{id}',[ClientController::class,'suspend'])->name('suspend-client');             
 
- 
+    Route::get('/suspended-clients',[ClientController::class,'showSuspended'])->name('suspended-clients');             
+    Route::post('/search-suspended-client',[ClientController::class,'searchSuspended'])->name('search-suspended-client');             
+    Route::get('/restore-client/{id}',[ClientController::class,'restore'])->name('restore-client');             
+
+    //require __DIR__.'/client.php';
+    //Client Login management
+    Route::get('/login',[ClientLoginController::class,'loginForm'])->name('login');
+    Route::get('/logout',[ClientLoginController::class,'logout'])->name('logout');
+    Route::get('/login/google',[ClientLoginController::class,'redirectToGoogle'])->name('login/google');
+    Route::get('/login/google/callback',[ClientLoginController::class,'handleGoogleCallback'])->name('login/google/callback');
+
+    Route::get('/my-zone/profile',[ClientLoginController::class,'profile'])->name('profile');
+    Route::post('/edit-client',[ClientLoginController::class,'edit'])->name('edit-client');
+
+
+    require __DIR__.'/orderManager.php';
+
+
+    require __DIR__.'/frontend.php';
+
+
+
+
+
 
 
 ?>    
+
+<!-- 
+
+
+namespace App\Http\Controllers\Order;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+
+class OrderController extends Controller
+{
+    public function showPendingOrders(){
+        return view('admin/order/admin/pendingOrders');
+    }
+}
+ -->
