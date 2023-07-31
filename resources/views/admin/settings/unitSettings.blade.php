@@ -28,8 +28,8 @@
                                 <option value="{{$unit->unit_name}}">{{$unit->unit_name}}</option>
                             @endforeach
                         </select> 
-
                     </div>
+                    
                     <div class="col-md">
                         <label for="" class="form-label">Description</label>
                         <input type="text" class="form-control" name="description" id="description" value="{{old('description')}}" aria-describedby="textHelpId" placeholder="optional" >
@@ -69,8 +69,6 @@
                             <a href="{{route('unit-settings')}}" class="btn btn-success default-btn">Make Default</a>
                         </div>
                     </div>
- 
-
                 </form>
 
             </div>
@@ -101,11 +99,7 @@
     
                         
                     </tbody>
-                </table>
-                <div class="row">
-                    {{$units->links()}}
-                </div>
-                
+                </table>                
             </div>
 
             

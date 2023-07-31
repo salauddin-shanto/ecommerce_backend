@@ -11,7 +11,7 @@
                <form action="{{route('area-update',['aria_id'=>$aria->aria_id])}}" method="post">
                     @csrf     
                     <div class="row">
-                         <div class="col-md ">
+                         <div class="column ">
                            <label for="" class="form-label">Aria Name</label>
                            <input type="text" class="form-control" name="aria_name" value="{{$aria->aria_name}}" id="aria_name" aria-describedby="emailHelpId" placeholder="London">
                            <span class="text-danger">
@@ -20,10 +20,15 @@
                               @enderror
                            </span>    
                          </div>
-     
-                         <div class="col-md ">
-                           <label for="" class="form-label">Parent Aria</label>
-                           <input type="text" class="form-control" name="parent_aria" value="{{$aria->parent_aria}}" id="parent_aria" aria-describedby="emailHelpId" placeholder="England">    
+
+                         <div class="column ">
+                              <label for="" class="form-label">Parent Area</label>
+                              <select class="form-select form-select-md" name="parent_aria" id="parent_aria">
+                                   <option value="{{old('parent_aria')}}">{{old('parent_aria') ? old("parent_aria"):'Select One'}}</option>
+                                   @foreach ($arias as $ariaEle)
+                                       <option value="{{$ariaEle->aria_name}}" {{$ariaEle->aria_name==$aria->parent_aria?'selected': ''}}>{{$ariaEle->aria_name}}</option>
+                                   @endforeach
+                               </select> 
                          </div>
 
                          <div>

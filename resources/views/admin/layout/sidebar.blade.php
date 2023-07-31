@@ -4,26 +4,27 @@
 
   {{-- toggle --}}
   <div class="toggle">
-      <ion-icon name="menu-outline" class="open"></ion-icon>
-      <ion-icon name="close-outline" class="close"></ion-icon>
+      <i class="fa-solid fa-bars"></i>
   </div>
 
   {{-- dashboard --}}
   <div class="top-link">
     <a href="#" class="sidebar-link">
-      <span class="icon"><ion-icon name="grid-outline"></ion-icon></ion-icon></span>
+      <span class="icon"><i class="fa-solid fa-gauge"></i></span>
       <span class="title">Dashboard</span>
     </a>
   </div>
   
   {{-- Settings --}}
+  @can(['unit add','aria add','category add','product add'])
+      
   <button id="menu1" class="collapsible">
     <div>
       <a>
-          <span class="icon"><ion-icon name="settings-outline"></ion-icon></span>
+          <span class="icon"><i class="fa-solid fa-gear"></i></span>
           <span class="title">Settings</span>
       </a>
-      <ion-icon name="chevron-down-outline" class="arrow"></ion-icon>
+      <i class="fa-solid fa-chevron-down"></i>
     </div>
   </button>
   <div class="contents"> 
@@ -43,27 +44,27 @@
         </div>
       @endcan
 
-{{--       
-      @can('supplier add')
-        <li id="submenu2" class="collapsible ">Suppliers</li>
-        <div class="nested">
-          <ul>
-            <li class="sidebar-link"><a href="{{url('/add-supplier')}}">Add Supplier</a></li>
-            <li class="sidebar-link"><a href="{{url('/show-suppliers')}}">Show Suppliers</a></li>
-          </ul>
-        </div> 
-      @endcan
+      {{--       
+        @can('supplier add')
+          <li id="submenu2" class="collapsible ">Suppliers</li>
+          <div class="nested">
+            <ul>
+              <li class="sidebar-link"><a href="{{url('/add-supplier')}}">Add Supplier</a></li>
+              <li class="sidebar-link"><a href="{{url('/show-suppliers')}}">Show Suppliers</a></li>
+            </ul>
+          </div> 
+        @endcan
 
-      @can('courier add')
-        <li id="submenu3" class="collapsible ">Courier</li>
-        <div class="nested">
-          <ul>
-            <li class="sidebar-link"><a href="{{url('/add-operator')}}">Add Operator</a></li>
-            <li class="sidebar-link"><a href="{{url('/show-operators')}}">Show Operators</a></li>
-          </ul>
-        </div>
-      @endcan
- --}}
+        @can('courier add')
+          <li id="submenu3" class="collapsible ">Courier</li>
+          <div class="nested">
+            <ul>
+              <li class="sidebar-link"><a href="{{url('/add-operator')}}">Add Operator</a></li>
+              <li class="sidebar-link"><a href="{{url('/show-operators')}}">Show Operators</a></li>
+            </ul>
+          </div>
+        @endcan
+      --}}
  
       @can('category add')
         <li id="submenu4" class="collapsible" >Category</li>
@@ -87,16 +88,17 @@
 
     </ul>
   </div>
-  
+  @endcan
+ 
 
   @can('role add')
     <button id="menu4" class="collapsible">
       <div>
         <a>
-          <span class="icon"><ion-icon name="caret-forward-circle-outline"></ion-icon></span>
+          <span class="icon"><i class="fa-solid fa-lock"></i></span>
           <span class="title">Menu Privilege</span>
         </a>
-        <ion-icon name="chevron-down-outline" class="arrow"></ion-icon>
+        <i class="fa-solid fa-chevron-down"></i>
       </div>
     </button>
     <div class="contents">
@@ -113,10 +115,10 @@
     <button id="menu2" class="collapsible">
       <div>
         <a>
-          <span class="icon"><ion-icon name="at-outline"></ion-icon></span>
+          <span class="icon"><i class="fa-solid fa-user-tie"></i></span>
           <span class="title">Admin Manager</span>
         </a>
-        <ion-icon name="chevron-down-outline" class="arrow"></ion-icon>
+        <i class="fa-solid fa-chevron-down"></i>
       </div>
     </button>
     <div class="contents">
@@ -132,10 +134,10 @@
     <button id="menu3" class="collapsible">
       <div>
         <a>
-          <span class="icon"><ion-icon name="people-outline"></ion-icon></span>
+          <span class="icon"><i class="fa-solid fa-user"></i></span>
           <span class="title">Customer Manager</span>
         </a>
-        <ion-icon name="chevron-down-outline" class="arrow"></ion-icon>
+        <i class="fa-solid fa-chevron-down"></i>
       </div>
     </button>
     <div class="contents">
@@ -148,14 +150,14 @@
   @endcan
 
 
-  @role('Super Admin')
+ {{--  @role('Super Admin') --}}
     <button id="menu6" class="collapsible">
       <div>
         <a>
-          <span class="icon"><ion-icon name="basket-outline"></ion-icon></span>
+          <span class="icon"><i class="fa-solid fa-bag-shopping"></i></span>
           <span class="title">Order Management</span>
         </a>
-        <ion-icon name="chevron-down-outline" class="arrow"></ion-icon>
+        <i class="fa-solid fa-chevron-down"></i>
       </div>
     </button>
     <div class="contents">
@@ -163,13 +165,13 @@
         <li class="sidebar-link"><a href="{{route('orders',['status'=>'pending'])}}">Pending Orders</a></li>
         <li class="sidebar-link"><a href="{{route('orders',['status'=>'approved'])}}">Approved Orders</a></li>
         <li class="sidebar-link"><a href="{{route('orders',['status'=>'processed'])}}">Processed Items</a></li>
-        <li class="sidebar-link"><a href="{{route('orders',['status'=>'handed to courier manager'])}}"> To Courier Manager</a></li>
+        <li class="sidebar-link"><a href="{{route('orders',['status'=>'received by courier manager'])}}">Received by Operator</a></li>
 {{--         <li class="sidebar-link"><a href="{{url('/received-from-supplier')}}">Received from Supplier</a></li>
  --}}        
         <li class="sidebar-link"><a href="{{route('orders',['status'=>'sent to courier'])}}">Sent to Courier</a></li>
         <li class="sidebar-link"><a href="{{route('orders',['status'=>'delivered to customer'])}}">Delivered to Customer</a></li>
         <li class="sidebar-link"><a href="{{route('orders',['status'=>'cancelled'])}}">Cancelled Orders</a></li>
-        <li class="sidebar-link"><a href="{{route('orders',['status'=>'returned'])}}">Returned Orders</a></li>
+        <li class="sidebar-link"><a href="{{route('orders',['status'=>'returned by customer'])}}">Returned Orders</a></li>
       </ul>
     </div>
 
@@ -177,17 +179,18 @@
     <button id="menu7" class="collapsible">
       <div>
         <a>
-          <span class="icon"><ion-icon name="shirt-outline"></ion-icon></span>
+          <span class="icon"><i class="fa-solid fa-universal-access"></i></span>
           <span class="title">Supplier Menu</span>
         </a>
-        <ion-icon name="chevron-down-outline" class="arrow"></ion-icon>
+        <i class="fa-solid fa-chevron-down"></i>
       </div>
     </button>
     <div class="contents">
       <ul>
         <li class="sidebar-link"><a href="{{route('supply',['status'=>'approved'])}}">Products For Supply</a></li>
         <li class="sidebar-link"><a href="{{route('supply',['status'=>'processed'])}}">Processed Orders</a></li>
-        <li class="sidebar-link"><a href="{{route('supply',['status'=>'handed to courier manager'])}}">To Courier Manager</a></li>
+        <li class="sidebar-link"><a href="{{route('supply',['status'=>'received by courier manager'])}}">To Courier Manager</a></li>
+        <li class="sidebar-link"><a href="{{route('supply',['status'=>'returned by customer'])}}">Returned by Customer</a></li>
       </ul>
     </div>
 
@@ -195,30 +198,44 @@
     <button id="menu8" class="collapsible">
       <div>
         <a>
-          <span class="icon"><ion-icon name="car-outline"></ion-icon></span>
+          <span class="icon"><i class="fa-solid fa-car"></i></span>
           <span class="title">Courier Manager</span>
         </a>
-        <ion-icon name="chevron-down-outline" class="arrow"></ion-icon>
+        <i class="fa-solid fa-chevron-down"></i>
       </div>
     </button>
     <div class="contents">
       <ul>
-        <li class="sidebar-link"><a href="#">Pending Orders</a></li>
-        <li class="sidebar-link"><a href="#">Order Approved</a></li>
-        <li class="sidebar-link"><a href="#">Processed Item</a></li>
-        <li class="sidebar-link"><a href="#">Received from Courier</a></li>
-        <li class="sidebar-link"><a href="#">Send to Courier </a></li>
-        <li class="sidebar-link"><a href="#">Delivered to Customer</a></li>
+        <li class="sidebar-link"><a href="{{route('parcel',['processed'])}}">Processed Parcel </a></li>
+        <li class="sidebar-link"><a href="{{route('parcel',['received'])}}">Received Parcel</a></li>
+        <li class="sidebar-link"><a href="{{route('parcel',['sent to courier'])}}">Sent to Courier </a></li>
+        <li class="sidebar-link"><a href="{{route('parcel',['delivered to customer'])}}">Delivered to Customer</a></li>
+        <li class="sidebar-link"><a href="{{route('parcel',['returned by customer'])}}">Returned by Customer</a></li>
+      </ul>
+    </div>
+
+    <button id="menu9" class="collapsible">
+      <div>
+        <a>
+          <span class="icon"><i class="fa-solid fa-money-check-dollar"></i></span>
+          <span class="title">Transactions</span>
+        </a>
+        <i class="fa-solid fa-chevron-down"></i>
+      </div>
+    </button>
+    <div class="contents">
+      <ul>
+        <li class="sidebar-link"><a href="{{route('operator-deposits')}}">Operator Deposits</a></li>
       </ul>
     </div>
 
     <div class="top-link">
       <a href="#" class="sidebar-link">
-        <span class="icon"><ion-icon name="shield-checkmark-outline"></ion-icon></ion-icon></span>
+        <span class="icon"><i class="fa-solid fa-circle-info"></i></span>
         <span class="title">Reports</span>
       </a>
     </div>
-  @endrole
+{{--   @endrole --}}
 
 
 

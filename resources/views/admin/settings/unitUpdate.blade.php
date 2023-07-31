@@ -1,7 +1,7 @@
-@extends('admin/master')
-     
+@extends('admin/layout/layout') 
+
 @section('content')
-    <link rel="stylesheet" href="{{asset('css/unitUpdate.css')}}">
+    <link rel="stylesheet" href="{{asset('css/admin/settings/unitSettings0.css')}}">
     <div class="content-margin">
         <div class="create-unit"> 
             <div class="form-title">
@@ -20,36 +20,57 @@
                             @enderror
                         </span>
                     </div>
+
                     <div class="col-md">
                         <label for="" class="form-label">Parent Unit</label>
-                        <input type="text" class="form-control" name="parent_unit" id="parent_unit" value="{{$unit->parent_unit}}" aria-describedby="textHelpId" placeholder="kg">
-                        <span class="text-danger">
-                            @error('parent_unit')
-                                {{$message}}
-                            @enderror
-                        </span>
+                        <select class="form-select form-select-md" name="parent_unit" id="parent_unit">
+                            <option value="">{{$unit->parent_unit == '' ? 'Select One' : ''}}</option>
+                            @foreach ($units as $unitEle)
+                                <option value="{{$unitEle->unit_name}}" {{$unit->parent_unit==$unitEle->unit_name ? 'selected' : ''}}>{{$unitEle->unit_name}}</option>
+                            @endforeach
+                        </select> 
                     </div>
-                    <div class="col">
+
+                    <div class="col-md">
                         <label for="" class="form-label">Description</label>
                         <input type="text" class="form-control" name="description" id="description" value="{{$unit->description}}" aria-describedby="textHelpId" placeholder="optional" >
                     </div>
                     
-                    <div>
-                        <button type="submit" class="btn btn-primary submit-unit">Submit</button>
+                    <div class="col-md">
+                        <button type="submit" class="btn btn-primary submit-btn">Submit</button>
                     </div>
-                    
-                    
                     
                 </div>
                 
             </form>
         </div>
 
-    
+        <div class="divider-line">
+        </div>
+
         <div class="show-units">
-            <div class="table-title">
-                <h4>Unit list</h4>
+            <div class="form-upper-row">
+                <div class="table-title">
+                    <h4>Unit list</h4>
+                </div>
+    
+                <form action="{{route('unit-settings.filter')}}" method="post">
+                    @csrf
+                    <div class="row">
+                        <div class="col-md">
+                          <input type="text" class="form-control" name="search_field" id="" placeholder="kg">
+                        </div>
+                        <div class="col-md">
+                            <button type="submit" class="btn btn-primary search-btn">Search</button>
+                        </div>
+                        <div class="col-md">
+                            <a href="{{route('unit-settings')}}" class="btn btn-success default-btn">Make Default</a>
+                        </div>
+                    </div>
+                </form>
             </div>
+
+
             <div class="table-responsive">
                 <table class="table table-primary">
                     <thead>

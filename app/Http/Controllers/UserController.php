@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Arias;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -15,7 +16,8 @@ class UserController extends Controller
 {
     public function add(){
         $roles=Role::all(); 
-        return view('admin/admin/addAdmin',['roles'=>$roles]);
+        $arias=Arias::all();
+        return view('admin/admin/addAdmin',['roles'=>$roles,'arias'=>$arias]);
     }
 
     public function store(Request $request){
@@ -28,6 +30,8 @@ class UserController extends Controller
             'nid'=>'required|size:10|unique:users',
             'password'=>'required|string|min:8|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/',
             'confirm_password'=>'required|same:password',
+            'aria'=>'nullable',
+            'address'=>'nullable',
             'roles'=>'required|array',
             'roles.*' => 'required',
             'image'=>'required|image|mimes:jpeg,jpg,png|max:3072'
@@ -54,9 +58,8 @@ class UserController extends Controller
             'nid'=>$request->input('nid'),
             'aria'=>$request->input('aria'),
             'address'=>$request->input('address'),
-            'shop_location'=>$request->input('shop_location'),
             'image'=>$imageName,
-            'create_at'=>$timeDate
+            'created_at'=>$timeDate
             
         ]);
         
@@ -100,7 +103,7 @@ class UserController extends Controller
     }
 
     public function details($id){
-        $user=User::with('roles')->find($id);
+        $user=User::with('roles','arias')->find($id);
         return view('admin/admin/adminDetails',['user'=>$user]);
     }
 
@@ -108,8 +111,9 @@ class UserController extends Controller
     public function edit($id){
         $allRoles=Role::all();
         $user=User::with('roles')->find($id);
+        $arias=Arias::all();
 
-        return view('admin/admin/updateAdmin',['allRoles'=>$allRoles,'user'=>$user]);
+        return view('admin/admin/updateAdmin',['allRoles'=>$allRoles,'user'=>$user,'arias'=>$arias]);
     }
 
     public function update($id,Request $request){
@@ -146,7 +150,6 @@ class UserController extends Controller
         $user->nid=$request->input('nid');
         $user->aria=$request->input('aria');
         $user->address=$request->input('address');
-        $user->shop_location=$request->input('shop_location');
         $user->updated_at=$timeDate;
 
         if($request->input('password')){            

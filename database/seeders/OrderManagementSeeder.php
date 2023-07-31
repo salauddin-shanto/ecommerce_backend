@@ -23,9 +23,8 @@ class OrderManagementSeeder extends Seeder
 
     public function run(): void
     {
+        //Client Seeder
         $faker = Faker::create();
-
-        // Create 100 clients
         for ($i = 0; $i < 100; $i++) {
             Client::create([
                 'name' => $faker->name,
@@ -38,15 +37,14 @@ class OrderManagementSeeder extends Seeder
                 'zone' => $faker->city,
                 'location' => $faker->city,
                 'google_id' =>$faker->numerify('')
-                // ...
             ]);
         }
     
-        // Create 200 orders with random client and product associations
+        // Order Seeder
         for ($i = 0; $i < 200; $i++) {
             $client = Client::inRandomOrder()->first();
             $product = Product::inRandomOrder()->first();
-            $deliveryStatuses = ['pending', 'approved', 'processed','handed to courier manager', 'sent to courier','cancelled', 'delivered to customer'];
+            $deliveryStatuses = ['pending', 'approved', 'processed','handed to courier manager','received by courier manager', 'sent to courier','cancelled', 'delivered to customer','returned by customer'];
             $role=Role::where('name','Supplier')->first();
             $supplier=$role->users()->inRandomOrder()->first();
 
@@ -59,13 +57,12 @@ class OrderManagementSeeder extends Seeder
             ]);
         }
 
+        //OrderItems Seeder
         $faker = Faker::create();
         $orders = Order::all();
         $products = Product::all();
 
-        //create order items for each order
         foreach ($orders as $order) {
-            // Generate a random number of order items for each order
             $itemCount = $faker->numberBetween(1, 5);
             $total_price=0;
             for ($i = 0; $i < $itemCount; $i++) {
@@ -84,24 +81,37 @@ class OrderManagementSeeder extends Seeder
             $order->save();
         }
 
+        //Payment method seeder
+        PaymentMethod::create([
+            'name' => 'Credit Card',
+            'description' => 'Payment through credit card',
+        ]);
+        PaymentMethod::create([
+            'name' => 'PayPal',
+            'description' => 'Payment through PayPal',
+        ]);
+        PaymentMethod::create([
+            'name' => 'Bkash',
+            'description' => 'Payment through Bkash',
+        ]);
+
+        PaymentMethod::create([
+            'name' => 'Nagad',
+            'description' => 'Payment through Nagad',
+        ]);
+
         //Payement seeder
         $faker = Faker::create();
-
-        // Retrieve all orders
         $orders = Order::all();
-    
-        // Retrieve all payment methods
         $paymentMethods = PaymentMethod::all();
     
         foreach ($orders as $order) {
-            // Generate random payment details
             $paymentStatus = $faker->randomElement(['full', 'partial','cash on delivery']);
             $paymentDate = $faker->dateTimeBetween($order->order_date, 'now');
             $transactionId = $faker->uuid;
             $banking_account = $faker->unique()->phoneNumber;
             $amount = $order->total_price;
     
-            // Create a payment record for the order
             Payment::create([
                 'order_id' => $order->order_id,
                 'method_id' => $paymentMethods->random()->method_id,

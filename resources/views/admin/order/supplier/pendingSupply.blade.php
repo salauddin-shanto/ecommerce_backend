@@ -3,53 +3,66 @@
 @section('content')
     <link rel="stylesheet" href="{{ asset('css/admin/order/supplier/pendingSupplies.css') }}">
     <div class="content-margin">
-        <div class="form-upper-row"> 
-            {{-- 
-                <div class="table-title">
-                    <h4> Supply {{$status}}</h4>  
-                </div>  
-           --}}
-            <form action="#" method="POST">
-                @csrf
-                <div class="row">
-                    <div class="col-md">
-                        <div class="mb-3">
-                            <select class="form-select form-select-md" name="" id="">
-                                <option selected>Select Category</option>
-                                <option value="">New Delhi</option>
-                                <option value="">Istanbul</option>
-                                <option value="">Jakarta</option>
-                            </select>
-                        </div>
-                    </div>
+        {{-- 
+            <div class="form-upper-row"> 
 
-                    <div class="col-md">
-                        <div class="mb-3">
-                            <select class="form-select form-select-md" name="" id="">
-                                <option selected>Select Stock</option>
-                                <option value="">New Delhi</option>
-                                <option value="">Istanbul</option>
-                                <option value="">Jakarta</option>
-                            </select>
+                    <div class="table-title">
+                        <h4> Supply {{$status}}</h4>  
+                    </div>  
+            
+                <form action="#" method="POST">
+                    @csrf
+                    <div class="row">
+                        <div class="col-md">
+                            <div class="mb-3">
+                                <select class="form-select form-select-md" name="" id="">
+                                    <option selected>Select Category</option>
+                                    <option value="">New Delhi</option>
+                                    <option value="">Istanbul</option>
+                                    <option value="">Jakarta</option>
+                                </select>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md">
-                        <input type="text" class="form-control product-input" name="search_field" placeholder="search product">
-                    </div>
-                    <div class="col-md">
-                        <button type="submit" class="btn btn-success search-btn">Search Product</button>
-                    </div>
-                    <div class="col-md">
-                        <a href="{{route('show-admins')}}" class="btn btn-success default-btn">Show Default</a>
+
+                        <div class="col-md">
+                            <input type="text" class="form-control product-input" name="search_field" placeholder="search product">
+                        </div>
+                        <div class="col-md">
+                            <button type="submit" class="btn btn-success search-btn">Search Product</button>
+                        </div>
+                        <div class="col-md">
+                            <a href="{{route('show-admins')}}" class="btn btn-success default-btn">Show Default</a>
+                        </div> 
                     </div> 
+                </form>
+            </div>
+        --}}
+
+        <form action="{{route('search-supply',['status'=>$status])}}" method="POST">
+            @csrf
+            <div class="row form-row">
+                <div class="col-md">
+                    @if ($status=='approved')
+                        <h4 scope="col">Pending Supply List</h4>
+                    @else
+                        <h4 scope="col">{{$status}} Supply List</h4>
+                    @endif
+                </div>  
+                <div class="search-area col-md">
+                    <input type="text" class="form-control" name="search_field" id="">
+                    <button type="submit" class="btn btn-primary search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </div>
+                <div class="col-md">
+                    <a href="{{route('supply',['status'=>$status])}}" class="btn btn-success default-btn">Show Default</a>
                 </div> 
-            </form>
-        </div>
+            </div> 
+        </form>
 
         <div class="table-responsive">
             <table class="table table-primary table-striped table-hover">
                 <thead>
                     <tr>
+                        <th scope="col">Order No.</th>
                         <th scope="col">Supply Status</th>
                         <th scope="col">Order Date</th>
                         <th scope="col">Total Price</th>
@@ -66,10 +79,14 @@
                 </thead>
 
                 <tbody>
-                    @foreach ($orders as $order)
-                        <tr>
+                    @if ($orders->isEmpty())
+                        <td colspan="13"><h4 class="bg-danger">No Data Available</h4></td>
+                    @else   
+                        @foreach ($orders as $order)
+                            <tr>
                                 {{--<form action="{{route('receive-order',['order_id'=>$order->order_id])}}" method="post">
                                 @csrf --}}
+                                <td scope="col">{{$order->order_id}}</td>
                                 @if ($order->delivery_status=='approved')
                                     <td scope="col">Pending</td>
                                 @else
@@ -81,28 +98,6 @@
                                 <td scope="col"> {{$order->payments->amount}} </td>
                                 <td scope="col"> {{$order->payments->due}} </td>
                                 <td scope="col"> {{$order->clients->area}} </td>
-                                {{--     
-                                @if ($status=='pending')
-                                    <td scope="col">
-                                        <input type="text" name="order_id" value="{{$order->order_id}}" hidden>
-                                        <div class="mb-3">
-                                            <select class="form-select form-select-md" name="supplier" id="">
-                                                <option value="">Select Supplier</option>
-                                                @foreach ($suppliers as $supplier)
-                                                    <option value="{{$supplier->id}}">{{$supplier->name}}</option>
-                                                @endforeach
-                                            </select>
-                                            @if ($order->order_id == old('order_id'))
-                                                @error('supplier')
-                                                    <span class="text-danger">
-                                                        {{ $message }}
-                                                    </span>
-                                                @enderror
-                                            @endif
-                                        </div>
-                                    </td>
-                                @endif
-                                --}}
                                 <td scope="col">
                                     <div class="actions">
                                         <a href="{{route('supply-order-details',['order_id'=>$order->order_id])}}" class="btn-group btn btn-primary">Details</a>
@@ -113,15 +108,15 @@
                                     </div>
                                 </td>
                         {{--     </form> --}}
-                        </tr>
-                            
-                    @endforeach
-                   
-
-
-
+                            </tr>     
+                        @endforeach
+                    @endif
                 </tbody> 
             </table>
+        </div>
+
+        <div>
+            {{ $orders->links('pagination::bootstrap-5') }}
         </div>
     </div>
 @endsection

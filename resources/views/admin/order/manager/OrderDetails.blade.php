@@ -14,7 +14,9 @@
                     <table class="table table-primary table-striped table-hover">
                         <thead>
                             <div>
+                                <h4>Order No : {{$order->order_id}}</h4>
                                 <h4>Products</h4>
+                                
                             </div>
                             <tr>
                                 <th scope="col">Image</th>
@@ -134,25 +136,25 @@
                         @endif
                         
                     </div> 
-                </div>
+                </div>  
 
-                @if ($order->delivery_status=='pending')
+                @if ($order->delivery_status=='pending' || $order->delivery_status=='cancelled')
                     <form action="{{route('pending-approve',['order_id'=>$order->order_id])}}" method="post">
                         @csrf
                         <div class="approve-section row">
                             <div class="col-md">
-                                <select class="form-select form-select-md" name="supplier" id="">
-                                    <option value="">Select Supplier</option>
-                                    @foreach ($suppliers as $supplier)
-                                        <option value="{{$supplier->id}}">{{$supplier->name}}</option>
+                                <select class="form-select form-select-md" name="aria" id="ariaSelect">
+                                    <option value="">Select Area</option>
+                                    @foreach ($arias as $aria)
+                                        <option value="{{$aria->aria_name}}">{{$aria->aria_name}}</option>
                                     @endforeach
                                 </select>
+                            </div>
 
-                                @error('supplier')
-                                    <span class="text-danger">
-                                        {{ $message }}
-                                    </span>
-                                @enderror
+                            <div class="col-md">
+                                <select class="form-select form-select-md" name="supplier" id="supplierSelect">
+                                    <option value="">Select Supplier</option>
+                                </select>
                             </div>
 
                             <div class="col-md">
@@ -164,33 +166,6 @@
                         </div>
                     </form>
 
-                @elseif ($order->delivery_status=='cancelled')
-                    <form action="{{route('pending-approve',['order_id'=>$order->order_id])}}" method="post">
-                        @csrf
-                        <div class="approve-section row">
-                            <div class="col-md">
-                                <select class="form-select form-select-md" name="supplier" id="">
-                                    <option value="">Select Supplier</option>
-                                    @foreach ($suppliers as $supplier)
-                                        <option value="{{$supplier->id}}">{{$supplier->name}}</option>
-                                    @endforeach
-                                </select>
-
-                                @error('supplier')
-                                    <span class="text-danger">
-                                        {{ $message }}
-                                    </span>
-                                @enderror
-                            </div>
-
-                            <div class="col-md">
-                                <div class="actions">
-                                    <button type="submit" class="btn btn-success btn-group ">Approve Again</button>
-                                    <a href="#" class="btn-group btn btn-primary">Refund Amount</a>                                          
-                                </div>
-                            </div>
-                        </div>
-                    </form>
                 @else
                     <div>
                         <hr>
@@ -201,10 +176,60 @@
                         <div class="col-md"><a href="{{route('details-admin',['id'=>$order->supplier_id])}}" class="btn btn-primary supplier-name ">Supplier Name : {{$order->users->name}}</a></div>
                     </div>    
 
+                    @if ($order->operator_id)
+                        <div>
+                            <hr>
+                            <h3>Operator Info</h3>
+                        </div>
+                        <div class="supplier-info row">
+                            <div class="col-md"><a href="{{route('details-admin',['id'=>$order->operator_id])}}" class="btn btn-primary supplier-name ">Operator Name : {{$order->operators->name}}</a></div>
+                        </div>    
+                    @endif
+
                 @endif
             </div>
         </div>
     </div>
+
+    
+    <script src="{{asset('cdns/cdn.jsdelivr.net_npm_axios@1.1.2_dist_axios.min.js')}}"></script>
+    <script>
+        const ariaSelect = document.getElementById('ariaSelect');
+        const supplierSelect = document.getElementById('supplierSelect');
+
+        ariaSelect.addEventListener('change',function(){
+            const aria_id= this.value;
+            if(aria_id){
+                axios.get(`/get-suppliers/${aria_id}`)
+                    .then((response)=>{
+                        let suppliers = response.data;
+                        if (!Array.isArray(suppliers)) {
+                            suppliers = [suppliers];
+                        }
+                        let supplier_options='';
+                        suppliers.forEach(supplier=>{
+                            supplier_options += `
+                            <option value="${supplier.id}"> ${supplier.name} </option>
+                            `;
+                        });
+
+                        supplierSelect.innerHTML = supplier_options;
+                    })
+
+                    .catch((error)=>{
+                        console.error(error);
+                    });
+            }
+
+            else{
+                supplierSelect.innerHTML = '<option value="">Select Supplier</option>';
+            }
+
+        });
+        
+        
+    </script>
+
 @endsection
 
 

@@ -128,13 +128,14 @@
 
                 <div class="row">
                     <div class="col-md ">
-                      <label for="" class="form-label">Area</label>
-                      <input type="text" class="form-control" name="aria" value="{{old('aria')}}" id="aria">
-                      <span class="text-danger">
-                         @error('aria')
-                             {{$message}}
-                         @enderror
-                      </span>     
+                        <label for="" class="form-label">Area</label>
+                        <select class="form-select form-select-md" name="aria" id="">
+                            <option value="">Select one</option>
+
+                            @foreach ($arias as $aria)
+                                <option value="{{$aria->aria_name}}">{{$aria->aria_name}}</option>
+                            @endforeach
+                        </select> 
                     </div>
 
                     <div class="col-md ">

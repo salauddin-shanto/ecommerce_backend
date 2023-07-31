@@ -52,8 +52,9 @@ class AriaController extends Controller
         $aria=DB::table('arias')
                 ->where('aria_id',$aria_id)
                 ->first();
+        $arias=DB::table('arias')->get();
 
-        return view('admin/settings/areaUpdate',['aria'=>$aria]);
+        return view('admin/settings/areaUpdate',['aria'=>$aria,'arias'=>$arias]);
     }
 
     public function update($aria_id, Request $request){

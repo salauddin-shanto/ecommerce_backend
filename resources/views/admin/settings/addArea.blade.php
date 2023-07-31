@@ -6,14 +6,14 @@
           <div class="create-aria">  
                <div class="form-title"> 
                     <h4>Add Area</h4>          
-               </div> 
+               </div>  
       
                <form action="{{route('add-area')}}" method="post">
                     @csrf
                     <div class="row">
                          <div class="column ">
-                           <label for="" class="form-label">Aria Name</label>
-                           <input type="text" class="form-control" name="aria_name" value="{{old('aria_name')}}" id="aria_name" aria-describedby="emailHelpId" placeholder="London">
+                           <label for="" class="form-label">Area Name</label>
+                           <input type="text" class="form-control" name="aria_name" value="{{old('aria_name')}}" id="aria_name" aria-describedby="emailHelpId" placeholder="London...">
                            <span class="text-danger">
                               @error('aria_name')
                                   {{$message}}
@@ -22,6 +22,7 @@
                          </div>
      
                          <div class="column ">
+                              <label for="" class="form-label">Parent Area</label>
                               <select class="form-select form-select-md" name="parent_aria" id="parent_aria">
                                    <option value="{{old('parent_aria')}}">{{old('parent_aria') ? old("parent_aria"):'Select One'}}</option>
                                    @foreach ($arias as $aria)

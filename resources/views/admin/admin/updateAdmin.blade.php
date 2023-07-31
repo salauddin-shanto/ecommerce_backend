@@ -127,13 +127,15 @@
 
                 <div class="row">
                     <div class="col-md ">
-                      <label for="" class="form-label">Area</label>
-                      <input type="text" class="form-control" name="aria" value="{{$user->aria}}" id="aria">
-                      <span class="text-danger">
-                         @error('aria')
-                             {{$message}}
-                         @enderror
-                      </span>     
+                        <label for="" class="form-label">Area</label>
+                        <select class="form-select form-select-md" name="aria" id="">
+                            @if ($user->aria == '')
+                                <option value="">Select One</option>
+                            @endif
+                            @foreach ($arias as $aria)
+                                <option value="{{$aria->aria_name}}" {{$user->aria == $aria->aria_name ? 'selected' : ''}}>{{$aria->aria_name}}</option>
+                            @endforeach
+                        </select> 
                     </div>
 
                     <div class="col-md ">
@@ -146,18 +148,6 @@
                         </span>     
                     </div>
 
-                </div>
-
-                <div class="row">
-                    <div class="col-md ">
-                        <label for="" class="form-label">Shop Location</label>
-                        <input type="text" class="form-control" name="shop_location" value="{{$user->shop_location}}" id="shop_location">
-                        <span class="text-danger">
-                           @error('shop_location')
-                               {{$message}}
-                           @enderror
-                        </span>     
-                    </div>
                 </div>
 
                 <div>

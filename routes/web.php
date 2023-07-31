@@ -152,25 +152,4 @@ Route::group(['middleware' => ['can:admin add']], function () {/* Routes for Adm
     require __DIR__.'/frontend.php';
 
 
-
-
-
-
-
 ?>    
-
-<!-- 
-
-
-namespace App\Http\Controllers\Order;
-
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-
-class OrderController extends Controller
-{
-    public function showPendingOrders(){
-        return view('admin/order/admin/pendingOrders');
-    }
-}
- -->

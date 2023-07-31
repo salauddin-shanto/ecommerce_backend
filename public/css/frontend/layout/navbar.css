@@ -1,0 +1,170 @@
+.container-fluid{
+    background-color: #f5f5f5;
+
+}
+.navbar{
+    display: flex;
+    justify-content: space-between;
+
+}
+
+
+.collapse-btn{
+    display: none;
+}
+/* Style the search area */
+
+.nav-logo img{
+    max-width: 200px;
+}
+
+.nav-search{
+    margin:0 20px;
+}
+
+.nav-search form{
+    display: flex;
+    align-items: center;
+}
+
+.nav-search input[type="text"]{
+    border-radius: 5px 0 0 5px;
+}
+.nav-search button{
+    border-radius:0 5px 5px 0;
+}
+
+.nav-search2{
+    margin-bottom: 10px;
+    display: none;
+}
+
+.nav-search2 form{
+    display: flex;
+    align-items: center;
+}
+
+.nav-search2 input[type="text"]{
+    border-radius: 5px 0 0 5px;
+}
+.nav-search2 button{
+    border-radius:0 5px 5px 0;
+}
+ul{
+    display: flex;
+    align-items: center;
+}
+li{
+    list-style-type: none;
+}
+a{
+    text-decoration: none;
+    color: black;
+    margin-left: 20px;
+
+}
+
+a:hover{
+    color: blue;
+}
+
+li div {
+    display: flex;
+}
+
+.collapsed-links {
+    display: none; /* Hide the dropdown page by default on small devices */
+    padding: 10px;
+    background-color: #f5f5f5;
+}
+/* 
+.product-category{
+    display: none;
+}
+
+.product-category.show{
+    display: block;
+}
+ */
+
+
+
+/* For small devices (e.g., smartphones) */
+@media (max-width: 767px) {
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .collapse-btn {
+        display: block;
+        align-items: center;
+        margin-top: 10px;
+        cursor: pointer;
+
+    }
+
+    .nav-logo {
+        text-align: center;
+        align-items: center;
+
+    }
+
+    .nav-logo img{
+        max-width: 100px;
+    }
+
+    .nav-links2 {
+        display: flex;
+        align-items: center;
+        margin-top: 15px;
+
+    }
+
+    .nav-links1,
+    .nav-search {
+        display: none; /* Hide the links1 by default on small devices */
+    }
+
+    .nav-search2{
+        display: block;
+    }
+
+
+    .collapsed-links.show {
+        display: block; /* Show the dropdown page when the toggle button is clicked */
+        margin-left: -40px;
+    }
+
+    .collapsed-links li{
+        text-align: center;
+     }
+/* 
+    .product-category.show{
+        display: block;
+    }
+    .product-category-flex{
+        display: flex;
+        overflow-x: auto;
+    }
+     */
+    .navbar-toggler {
+        border: none;
+        background: transparent;
+        font-size: 24px;
+        cursor: pointer;
+    }
+
+    .navbar-toggler i {
+        padding: 5px;
+    }
+
+    .nav-links1 ul.show {
+        display: flex; /* Show the links1 when the toggle button is clicked */
+        flex-wrap: wrap;
+    }
+
+    .nav-links1 li {
+        flex-basis: 50%; /* Show links1 items in two columns */
+    }
+}

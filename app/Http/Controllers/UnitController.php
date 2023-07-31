@@ -1,10 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Units;
- 
+
+use App\Models\Unit;
 use Illuminate\Http\Request;
-use SebastianBergmann\CodeCoverage\Report\Xml\Unit;
 use Illuminate\Support\Facades\DB;
 
 use function PHPUnit\Framework\isEmpty;
@@ -13,7 +12,7 @@ use function PHPUnit\Framework\isNull;
 class UnitController extends Controller
 {
     public function show(){
-        $units=DB::table('units')->simplePaginate(15);        
+        $units=Unit::all();
         return view('admin/settings/unitSettings',['units'=>$units]);
     } 
 

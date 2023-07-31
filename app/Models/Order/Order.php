@@ -49,6 +49,10 @@ class Order extends Model
         return $this->belongsTo(User::class, 'supplier_id','id');
     }
 
+    public function operators(){
+        return $this->belongsTo(User::class, 'operator_id','id');
+    }
+
 
 
 

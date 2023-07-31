@@ -1,5 +1,6 @@
 @extends('frontend/layout/master')
 @section('content')
+{{-- 
     <link rel="stylesheet" href="{{asset('css/frontend/home/homePage.css')}}">
     <section class="hero">
         <h1>Welcome to My eCommerce Store</h1>
@@ -17,7 +18,44 @@
                     <a href="#" class="btn btn-primary">View Details</a>
                     <button type="button" class="btn btn-success">Add to Cart</button>
                 </div>
-            @endforeach
+            @endforeach 
         </div>
     </section>
+ --}}
+ <link rel="stylesheet" href="{{asset('css/frontend/home/homePage.css')}}">
+    <div class="main-container">
+        <div class="product-category">
+            <!-- Add your content for the dropdown page here -->
+            <ul class="product-category-flex container">
+                <li><a href="">Fruits</a></li>
+                <li><a href="">Trees</a></li>
+                <li><a href="">Vegetables</a></li>
+                <li><a href="">Agro</a></li>
+                <li><a href="">Fruits</a></li>
+                <li><a href="">Trees</a></li>
+                <li><a href="">Vegetables</a></li>
+                <li><a href="">Agro</a></li>
+                <li><a href="">Fruits</a></li>
+                <li><a href="">Trees</a></li>
+                <li><a href="">Vegetables</a></li>
+                <li><a href="">Agro</a></li>
+                <li><a href="">Fruits</a></li>
+                <li><a href="">Trees</a></li>
+                <li><a href="">Vegetables</a></li>
+                <li><a href="">Agro</a></li>
+                <li><a href="">Fruits</a></li>
+                <li><a href="">Trees</a></li>
+                <li><a href="">Vegetables</a></li>
+                <li><a href="">Fruits</a></li>
+                <li><a href="">Trees</a></li>
+                <li><a href="">Vegetables</a></li>
+                <li><a href="">Agro</a></li>
+                <li><a href="">Fruits</a></li>
+                <li><a href="">Trees</a></li>
+                <li><a href="">Vegetables</a></li>
+
+            </ul>
+        </div>
+    </div>
+
 @endsection

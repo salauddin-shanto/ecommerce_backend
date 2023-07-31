@@ -25,26 +25,15 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js" integrity="sha512-uMtXmF28A2Ab/JJO2t/vYhlaa/3ahUOgj1Zf27M5rOo8/+fcTUVH0/E0ll68njmjrLqOBjXM3V9NiPFL5ywWPQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
    
+    <!-- Add this link to the head section of your HTML file -->
+    <script src="https://kit.fontawesome.com/a1ca225932.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{{asset('css/frontend/layout/master.css')}}">
+
 </head>
 
 <body>
     <header>
-        <nav>
-            <div class="nav-sec">
-                <ul>
-                    <li><a href="{{route('home')}}">Home</a></li>
-                    <li><a href="#">Shop</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Contact</a></li>
-                </ul>
-                <ul>
-                    <li><a href="{{route('cart')}}">Cart</a></li>
-                    <li><a href="#">Account</a></li>
-                </ul>
-            </div>
-
-        </nav>
+        @include('frontend/layout/navbar')
     </header>
 
     <main>
@@ -53,9 +42,10 @@
 
     <footer>
         <p>&copy; 2023 My eCommerce Store. All rights reserved.</p>
+        <p>&copy; 2023 My eCommerce Store. All rights reserved.</p>
+        <p>&copy; 2023 My eCommerce Store. All rights reserved.</p>
     </footer>
 
-    <script src="script.js"></script>
 </body>
 
 </html>

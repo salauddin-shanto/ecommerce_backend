@@ -142,23 +142,154 @@
 
                 @if ($order->delivery_status=='approved')
                     <div class="card last-card text-start">
-                    <div class="card-body">
-                        <div class="row supply-approve">
-                            <div class="col-md">
-                                <a href="{{route('receive-order',['order_id'=>$order->order_id])}}" class="btn-group btn btn-success receive">Recieve</a>                                         
+                        <div class="card-body">
+                            <div class="row supply-approve">
+                                <div class="col-md">
+                                    <a href="{{route('receive-order',['order_id'=>$order->order_id])}}" class="btn-group btn btn-success receive">Recieve</a>                                         
+                                </div>
+                                <div class="col-md">
+                                    <a href="{{route('deny-order',['order_id'=>$order->order_id])}}" class="btn-group btn btn-danger receive">Deny</a>                                         
+                                </div>
+                                            
                             </div>
-                            <div class="col-md">
-                                <a href="{{route('deny-order',['order_id'=>$order->order_id])}}" class="btn-group btn btn-danger receive">Deny</a>                                         
-                            </div>
-                                        
                         </div>
                     </div>
+
+                @elseif ($order->delivery_status=='processed' && is_null($order->operator_id))
+                    <form action="{{route('assign-operator',['order_id'=>$order->order_id])}}" method="post">
+                        @csrf
+                        <div class="approve-section row">
+                            <div class="col-md">
+                                <select class="form-select form-select-md" name="aria" id="ariaSelect">
+                                    <option value="">Select Area</option>
+                                    @foreach ($arias as $aria)
+                                        <option value="{{$aria->aria_name}}">{{$aria->aria_name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                    
+                            <div class="col-md">
+                                <select class="form-select form-select-md" name="operator" id="operatorSelect">
+                                    <option value="">Select Operator</option>
+                                </select>
+                            </div>
+                    
+                            <div class="col-md">
+                                <div class="actions">
+                                    <button type="submit" class="btn btn-success btn-group ">Add the Operator</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    
+                @else
+                {{-- 
+                    <div>
+                        <hr>
+                        <h3>Courier Operator Info</h3>
                     </div>
+                    <div class="operator-info row">
+                        <div class="col-md"><a href="{{route('details-admin',['id'=>$order->operator_id])}}" class="btn btn-primary operator-name ">Operator Name : {{$order->users->name}}</a></div>
+                    </div>    
+                     --}}
+
+                     <div class="customer-details-header">
+                        <h4>Courier Operator Info</h4>
+                    </div>
+    
+                    <div class="row customer-details">
+                        <div class="col-md">
+                            <div class="info">
+                                <h6>Name</h6>
+                                <h5>{{$order->operators->name}}</h5>
+                            </div>
+    
+                            <div class="info">
+                                <h6>Phone No</h6>
+                                <h5>{{$order->operators->phone}}</h5>
+                            </div>
+    
+                            @if ($order->operators->phone2)
+                                <div class="info">
+                                    <h6>Another Phone No</h6>
+                                    <h5>{{$order->operators->phone2}}</h5>
+                                </div>      
+                            @endif
+    
+                            @if ($order->operators->email)
+                                <div class="info">
+                                    <h6>Email</h6>
+                                    <h5>{{$order->operators->email}}</h5>
+                                </div> 
+                            @endif
+                        </div>
+    
+                        <div class="col-md">
+                            @if ($order->operators->aria)
+                                <div class="info">
+                                    <h6>Area</h6>
+                                    <h5>{{$order->operators->aria}}</h5>
+                                </div> 
+                            @endif
+    
+                            @if ($order->operators->address)
+                                <div class="info">
+                                    <h6>Address</h6>
+                                    <h5>{{$order->operators->address}}</h5>
+                                </div>    
+                            @endif
+
+                            
+                        </div> 
+                    </div>
+    
                 @endif
+                
 
             </div>
         </div>
     </div>
+
+        
+    <script src="{{asset('cdns/cdn.jsdelivr.net_npm_axios@1.1.2_dist_axios.min.js')}}"></script>
+    <script>
+        const ariaSelect = document.getElementById('ariaSelect');
+        const operatorSelect = document.getElementById('operatorSelect');
+
+        ariaSelect.addEventListener('change',function(){
+            const aria_id= this.value;
+            if(aria_id){
+                axios.get(`/get-operators/${aria_id}`)
+                    .then((response)=>{
+                        let operators = response.data;
+                        if (!Array.isArray(operators)) {
+                            operators = [operators];
+                        }
+                        let operator_options='';
+                        operators.forEach(operator=>{
+                            operator_options += `
+                            <option value="${operator.id}"> ${operator.name} </option>
+                            `;
+                        });
+
+                        operatorSelect.innerHTML = operator_options;
+                    })
+
+                    .catch((error)=>{
+                        console.error(error);
+                    });
+            }
+
+            else{
+                operatorSelect.innerHTML = '<option value="">Select Operator</option>';
+            }
+
+        });
+        
+        
+    </script>
+
 @endsection
+
 
 

@@ -1,0 +1,120 @@
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #f5f5f5;
+    height: your-navbar-height;
+    padding: 10px;
+}
+
+/* Style the logo area */
+.navbar-logo img {
+    height: auto;
+    max-height: 100%;
+}
+
+/* Style the search area */
+.navbar-search {
+    flex: 1;
+    margin: 0 20px;
+}
+
+.navbar-search form {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-search input[type="text"] {
+    flex: 1;
+    border: none;
+    padding: 8px 12px;
+    font-size: 14px;
+}
+
+.navbar-search button {
+    border: none;
+    background-color: #007bff;
+    color: #fff;
+    padding: 8px 15px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.navbar-search button:hover {
+    background-color: #0056b3;
+}
+
+/* Style the links area */
+.navbar-links ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar-links li {
+    display: inline-block;
+    margin-left: 10px;
+}
+
+.navbar-links a {
+    color: #333;
+    text-decoration: none;
+    padding: 8px;
+}
+
+.navbar-links a:hover {
+    color: #007bff;
+}
+/* 
+@media (max-width:350px){
+    .navbar-logo img{
+        margin-left: 20px;
+        width: 10px;
+    }
+}
+ */
+/* Your existing CSS styles for the navbar */
+.navbar-toggler{
+    display: none;
+}
+/* For smartphones and small devices */
+/* Your existing CSS styles for the navbar */
+
+/* For smartphones and small devices */
+@media (max-width: 767px) {
+    .navbar {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .navbar-search,
+    .navbar-links {
+        flex-basis: 100%;
+    }
+
+    .navbar-links ul {
+        display: none;
+    }
+
+    .navbar-toggler {
+        display: block;
+        border: none;
+        background: transparent;
+        font-size: 24px;
+        cursor: pointer;
+    }
+
+    .navbar-toggler i {
+        padding: 5px;
+    }
+
+    .navbar-links ul.show {
+        display: flex;
+    }
+}
